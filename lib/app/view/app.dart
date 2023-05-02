@@ -2,8 +2,10 @@ import 'package:anaheim_technologies_website/counter/counter.dart';
 import 'package:anaheim_technologies_website/features/home/screen/home_screen.dart';
 import 'package:anaheim_technologies_website/features/privacy/screen/privacy_screen.dart';
 import 'package:anaheim_technologies_website/l10n/l10n.dart';
+import 'package:anaheim_technologies_website/utils/color_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class App extends StatelessWidget {
   App({super.key});
@@ -37,6 +39,10 @@ class App extends StatelessWidget {
         colorScheme: ColorScheme.fromSwatch(
           accentColor: const Color(0xFF13B9FF),
         ),
+        textTheme: GoogleFonts.notoSansTextTheme().apply(
+          bodyColor: AppColors.foregroundColor,
+          displayColor: AppColors.foregroundColor,
+        )
       ),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
