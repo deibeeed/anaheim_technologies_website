@@ -1,4 +1,5 @@
 import 'package:anaheim_technologies_website/counter/counter.dart';
+import 'package:anaheim_technologies_website/features/about_us/screen/about_us_screen.dart';
 import 'package:anaheim_technologies_website/features/home/screen/home_screen.dart';
 import 'package:anaheim_technologies_website/features/privacy/screen/privacy_screen.dart';
 import 'package:anaheim_technologies_website/l10n/l10n.dart';
@@ -25,6 +26,12 @@ class App extends StatelessWidget {
         path: '/privacy',
         builder: (context, state) {
           return const PrivacyScreen();
+        },
+      ),
+      GoRoute(
+        path: '/us',
+        builder: (context, state) {
+          return const AboutUsScreen();
         },
       ),
     ],

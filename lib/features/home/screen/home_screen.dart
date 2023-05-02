@@ -3,9 +3,11 @@ import 'package:anaheim_technologies_website/utils/print_utils.dart';
 import 'package:anaheim_technologies_website/utils/widget_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'dart:math' as math;
 
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -13,13 +15,12 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    printd('size: $size');
     var rx0Height = size.height * 0.55;
+    var strikeFreedomHeight = size.height * 0.62;
     var reginleifHeight = size.height * 0.4;
     final screenHeight = size.height * 2;
     final screenWidth = size.width;
     var centerPieceHeight = screenHeight * 0.47;
-    printd('centerPieceHeight: $centerPieceHeight');
 
     if (rx0Height > 800) {
       rx0Height = 800.0;
@@ -31,6 +32,10 @@ class HomeScreen extends StatelessWidget {
 
     if (centerPieceHeight > 954) {
       centerPieceHeight = 954;
+    }
+
+    if (strikeFreedomHeight > 635) {
+      strikeFreedomHeight = 635;
     }
 
     return Scaffold(
@@ -52,14 +57,14 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             Positioned(
-              left: -173,
-              top: screenHeight * 0.33,
+              left: -190,
+              top: screenHeight * 0.32,
               child: Transform(
                 alignment: Alignment.center,
                 transform: Matrix4.rotationY(math.pi),
                 child: SvgPicture.asset(
                   'assets/svg/strike-freedom-vector.svg',
-                  height: rx0Height,
+                  height: strikeFreedomHeight,
                   colorFilter: ColorFilter.mode(
                     AppColors.foregroundColor.withOpacity(0.015),
                     BlendMode.srcIn,
@@ -90,32 +95,31 @@ class HomeScreen extends StatelessWidget {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.baseline,
                 textBaseline: TextBaseline.ideographic,
-                children: const [
-                  Text(
-                    'ATO',
-                    style: TextStyle(
-                      fontFamily: 'Mechsuit',
-                      fontSize: 24,
-                      color: AppColors.whiteColor,
+                children: [
+                  InkWell(
+                    onTap: () => GoRouter.of(context).go('/'),
+                    child: const Text(
+                      'ATO',
+                      style: TextStyle(
+                        fontFamily: 'Mechsuit',
+                        fontSize: 24,
+                        color: AppColors.whiteColor,
+                      ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 78,
                   ),
-                  Text(
-                    'about us',
-                    style: TextStyle(
-                      fontFamily: 'Plavsky',
-                    ),
+                  const HoveredText(
+                    text: 'about us',
+                    navigateTo: '/us',
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 68,
                   ),
-                  Text(
-                    'projects',
-                    style: TextStyle(
-                      fontFamily: 'Plavsky',
-                    ),
+                  const HoveredText(
+                    text: 'projects',
+                    navigateTo: '/projects',
                   ),
                 ],
               ),
@@ -232,7 +236,8 @@ class HomeScreen extends StatelessWidget {
               left: screenWidth * 0.2,
               child: const SizedBox(
                 width: 250,
-                child: Text('Your digital identity is as important as your real-world one. We create your digital identity that emulates your mission.'),
+                child: Text(
+                    'Your digital identity is as important as your real-world one. We create your digital identity that emulates your mission.'),
               ),
             ),
             Positioned(
@@ -240,7 +245,8 @@ class HomeScreen extends StatelessWidget {
               left: screenWidth * 0.446,
               child: const SizedBox(
                 width: 250,
-                child: Text('Creating out of nothing is in our DNA. We make mobile, web, desktop applications and IoT prototyping.'),
+                child: Text(
+                    'Creating out of nothing is in our DNA. We make mobile, web, desktop applications and IoT prototyping.'),
               ),
             ),
             Positioned(
@@ -248,7 +254,8 @@ class HomeScreen extends StatelessWidget {
               left: screenWidth * 0.69,
               child: const SizedBox(
                 width: 250,
-                child: Text('Making great user experience = more user engagement. We are your partners in making your product speak for your digital identity'),
+                child: Text(
+                    'Making great user experience = more user engagement. We are your partners in making your product speak for your digital identity'),
               ),
             ),
             Positioned(
@@ -287,6 +294,7 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
             ),
+            // footer
             Positioned(
               left: screenWidth * 0.1,
               right: screenWidth * 0.06,
@@ -294,22 +302,29 @@ class HomeScreen extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      SvgPicture.asset(
-                        'assets/svg/facebook.svg',
-                        height: 24,
-                        color: AppColors.foregroundColor,
-                      ),
-                      const SizedBox(
-                        width: 8,
-                      ),
-                      const Text(
-                        'fb.com/anaheim.technologies',
-                      )
-                    ],
+                  InkWell(
+                    onTap: () async {
+                      if (await canLaunchUrlString('https://fb.com/anaheim.technologies')) {
+                        launchUrlString('https://fb.com/anaheim.technologies');
+                      }
+                    },
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        SvgPicture.asset(
+                          'assets/svg/facebook.svg',
+                          height: 24,
+                          color: AppColors.foregroundColor,
+                        ),
+                        const SizedBox(
+                          width: 8,
+                        ),
+                        const Text(
+                          'fb.com/anaheim.technologies',
+                        )
+                      ],
+                    ),
                   ),
                   Row(
                     mainAxisSize: MainAxisSize.min,
@@ -328,22 +343,29 @@ class HomeScreen extends StatelessWidget {
                       )
                     ],
                   ),
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      SvgPicture.asset(
-                        'assets/svg/linkedin.svg',
-                        height: 24,
-                        color: AppColors.foregroundColor,
-                      ),
-                      const SizedBox(
-                        width: 8,
-                      ),
-                      const Text(
-                        'linkedin.com/company/anaheim-technologies',
-                      )
-                    ],
+                  InkWell(
+                    onTap: () async {
+                      if (await canLaunchUrlString('https://linkedin.com/company/anaheim-technologies')) {
+                        launchUrlString('https://linkedin.com/company/anaheim-technologies');
+                      }
+                    },
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        SvgPicture.asset(
+                          'assets/svg/linkedin.svg',
+                          height: 24,
+                          color: AppColors.foregroundColor,
+                        ),
+                        const SizedBox(
+                          width: 8,
+                        ),
+                        const Text(
+                          'linkedin.com/company/anaheim-technologies',
+                        )
+                      ],
+                    ),
                   ),
                 ],
               ),

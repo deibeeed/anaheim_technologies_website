@@ -5,5 +5,6 @@ class AppColors {
   static const whiteColor = Colors.white;
   static const gradientTop = Color(0xFF1B282F);
   static const gradientBottom = Color(0xFF0D161A);
+  static const textLinkColor = Color(0xFF41F39E);
 }
 
