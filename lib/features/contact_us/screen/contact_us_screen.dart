@@ -1,26 +1,23 @@
 import 'package:anaheim_technologies_website/utils/color_utils.dart';
 import 'package:anaheim_technologies_website/utils/print_utils.dart';
 import 'package:anaheim_technologies_website/utils/widget_utils.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:go_router/go_router.dart';
 import 'dart:math' as math;
 
-import 'package:google_fonts/google_fonts.dart';
+import 'package:go_router/go_router.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
-
+class ContactUsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     var rx0Height = size.height * 0.55;
-    var strikeFreedomHeight = size.height * 0.62;
     var reginleifHeight = size.height * 0.4;
-    final screenHeight = size.height * 2;
+    var strikeFreedomHeight = size.height * 0.62;
+    final screenHeight = size.height;
     final screenWidth = size.width;
-    var centerPieceHeight = screenHeight * 0.47;
 
     if (rx0Height > 800) {
       rx0Height = 800.0;
@@ -30,18 +27,13 @@ class HomeScreen extends StatelessWidget {
       reginleifHeight = 650.0;
     }
 
-    if (centerPieceHeight > 954) {
-      centerPieceHeight = 954;
-    }
-
     if (strikeFreedomHeight > 635) {
       strikeFreedomHeight = 635;
     }
 
     return Scaffold(
-      body: WidgetUtils.extendedBackground(
+      body: WidgetUtils.defaultBackground(
         context: context,
-        height: screenHeight,
         child: Stack(
           children: [
             Positioned(
@@ -58,7 +50,7 @@ class HomeScreen extends StatelessWidget {
             ),
             Positioned(
               left: -190,
-              top: screenHeight * 0.32,
+              top: screenHeight * 0.6,
               child: Transform(
                 alignment: Alignment.center,
                 transform: Matrix4.rotationY(math.pi),
@@ -73,7 +65,7 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             Positioned(
-              right: -screenHeight * 0.18,
+              left: screenHeight * 0.6,
               top: screenHeight * 0.75,
               child: Transform(
                 alignment: Alignment.center,
@@ -88,7 +80,7 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
             ),
-            // contents here
+            // header
             Positioned(
               top: 56,
               left: screenWidth * 0.18,
@@ -132,171 +124,161 @@ class HomeScreen extends StatelessWidget {
                 textStyle: TextStyle(
                     fontFamily: 'Plavsky', color: AppColors.whiteColor),
                 navigateTo: '/hello',
+                alwaysShowIndicator: true,
               ),
             ),
+            // content here
             Positioned(
-              top: screenHeight * 0.12,
-              left: screenWidth * 0.22,
+              top: screenHeight * 0.2,
+              left: screenWidth * 0.25,
               child: const Text(
-                'Ideas - \nDelivered.',
-                style: TextStyle(
-                    fontFamily: 'Plavsky',
-                    color: AppColors.whiteColor,
-                    fontSize: 56),
+                'Talk to us',
+                style: TextStyle(fontFamily: 'Mechsuit', fontSize: 16),
               ),
             ),
             Positioned(
-              top: screenHeight * 0.22,
-              left: screenWidth * 0.22,
-              child: OutlinedButton(
-                onPressed: () => GoRouter.of(context).go('/hello'),
-                style: OutlinedButton.styleFrom(
-                  foregroundColor: AppColors.foregroundColor,
-                  padding: const EdgeInsets.all(16),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(4)),
-                  side: const BorderSide(
-                    color: AppColors.foregroundColor,
+              top: screenHeight * 0.28,
+              left: screenWidth * 0.25,
+              child: Text.rich(
+                TextSpan(text: '''
+We want to know you more. Please fill out the 
+form. Rest assured that we are collecting your
+data according to the Data Privacy Act of 2012.
+
+Click ''', children: [
+                  TextSpan(
+                      text: 'here',
+                      style: const TextStyle(
+                        color: AppColors.textLinkColor,
+                      ),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          GoRouter.of(context).go('/privacy');
+                        }),
+                  const TextSpan(
+                    text: ' to learn more.',
                   ),
-                ),
-                child: Row(
-                  children: [
-                    Text('Talk to us',
-                        style: GoogleFonts.notoSans(fontSize: 16)),
-                    const SizedBox(
-                      width: 8,
-                    ),
-                    const Icon(
-                      Icons.arrow_right_alt,
-                      color: AppColors.foregroundColor,
-                    ),
-                  ],
-                ),
+                ]),
               ),
             ),
             Positioned(
-              top: screenHeight * 0.3,
-              left: screenWidth * 0.15,
-              child: SvgPicture.asset(
-                'assets/svg/center_piece.svg',
-                height: centerPieceHeight,
-              ),
-            ),
-            Positioned(
-              top: screenHeight * 0.35,
-              left: screenWidth * 0.455,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: const [
-                  Text(
-                    'Full stack',
-                    style: TextStyle(fontFamily: 'Plavsky'),
+                top: screenHeight * 0.42,
+                left: screenWidth * 0.25,
+                child: SizedBox(
+                  width: screenWidth * 0.18,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const TextField(
+                        style: TextStyle(color: AppColors.textLinkColor),
+                        cursorColor: AppColors.textLinkColor,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: AppColors.textLinkColor,
+                            ),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: AppColors.textLinkColor),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: AppColors.textLinkColor,
+                            ),
+                          ),
+                          label: Text(
+                            'Full name',
+                            style: TextStyle(color: AppColors.textLinkColor),
+                          ),
+                          floatingLabelBehavior: FloatingLabelBehavior.always,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 32,
+                      ),
+                      const TextField(
+                        style: TextStyle(color: AppColors.textLinkColor),
+                        cursorColor: AppColors.textLinkColor,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: AppColors.textLinkColor,
+                            ),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: AppColors.textLinkColor),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: AppColors.textLinkColor,
+                            ),
+                          ),
+                          label: Text(
+                            'Email Address',
+                            style: TextStyle(color: AppColors.textLinkColor),
+                          ),
+                          floatingLabelBehavior: FloatingLabelBehavior.always,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 32,
+                      ),
+                      const TextField(
+                        maxLines: 5,
+                        style: TextStyle(color: AppColors.textLinkColor),
+                        cursorColor: AppColors.textLinkColor,
+                        decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: AppColors.textLinkColor,
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: AppColors.textLinkColor),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: AppColors.textLinkColor,
+                              ),
+                            ),
+                            label: Text(
+                              'Message',
+                              style: TextStyle(color: AppColors.textLinkColor),
+                            ),
+                            floatingLabelBehavior: FloatingLabelBehavior.always,
+                            hintText: 'How can we help you?',
+                            hintStyle: TextStyle(color: Color(0xFF49454F))),
+                      ),
+                      const SizedBox(
+                        height: 56,
+                      ),
+                      SizedBox(
+                        width: double.infinity,
+                        child: OutlinedButton(
+                          onPressed: () => printd('Submit!!'),
+                          child: const Padding(
+                            padding: EdgeInsets.all(8),
+                            child: Text('Send'),
+                          ),
+                          style: OutlinedButton.styleFrom(
+                            foregroundColor: AppColors.textLinkColor,
+                            backgroundColor: AppColors.gradientBottom,
+                            padding: const EdgeInsets.all(16),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(32)),
+                            side: const BorderSide(
+                              color: AppColors.textLinkColor,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                  Text(
-                    'Development',
-                    style: TextStyle(fontFamily: 'Plavsky', fontSize: 32),
-                  ),
-                ],
-              ),
-            ),
-            Positioned(
-              top: screenHeight * 0.45,
-              left: screenWidth * 0.293,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: const [
-                  Text(
-                    'Comprehensive',
-                    style: TextStyle(fontFamily: 'Plavsky'),
-                  ),
-                  Text(
-                    'Branding',
-                    style: TextStyle(fontFamily: 'Plavsky', fontSize: 32),
-                  ),
-                ],
-              ),
-            ),
-            Positioned(
-              top: screenHeight * 0.45,
-              right: screenWidth * 0.21,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: const [
-                  Text(
-                    'Product design and development',
-                    style: TextStyle(fontFamily: 'Plavsky'),
-                  ),
-                  Text(
-                    'Design',
-                    style: TextStyle(fontFamily: 'Plavsky', fontSize: 32),
-                  ),
-                ],
-              ),
-            ),
-            Positioned(
-              top: screenHeight * 0.6,
-              left: screenWidth * 0.2,
-              child: const SizedBox(
-                width: 250,
-                child: Text(
-                    'Your digital identity is as important as your real-world one. We create your digital identity that emulates your mission.'),
-              ),
-            ),
-            Positioned(
-              top: screenHeight * 0.63,
-              left: screenWidth * 0.446,
-              child: const SizedBox(
-                width: 250,
-                child: Text(
-                    'Creating out of nothing is in our DNA. We make mobile, web, desktop applications and IoT prototyping.'),
-              ),
-            ),
-            Positioned(
-              top: screenHeight * 0.6,
-              left: screenWidth * 0.69,
-              child: const SizedBox(
-                width: 250,
-                child: Text(
-                    'Making great user experience = more user engagement. We are your partners in making your product speak for your digital identity'),
-              ),
-            ),
-            Positioned(
-              bottom: screenHeight * 0.18,
-              left: screenWidth * 0.26,
-              child: const Text(
-                'Are you ready to co-create with us? Let’s connect!',
-                style: TextStyle(fontSize: 32),
-              ),
-            ),
-            Positioned(
-              bottom: screenHeight * 0.13,
-              left: screenWidth * 0.44,
-              child: OutlinedButton(
-                onPressed: () => GoRouter.of(context).go('/hello'),
-                style: OutlinedButton.styleFrom(
-                    foregroundColor: AppColors.foregroundColor,
-                    padding: const EdgeInsets.all(16),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(4)),
-                    side: const BorderSide(
-                      color: AppColors.foregroundColor,
-                    )),
-                child: Row(
-                  children: [
-                    Text('Talk to us today!',
-                        style: GoogleFonts.notoSans(fontSize: 16)),
-                    const SizedBox(
-                      width: 8,
-                    ),
-                    const Icon(
-                      Icons.arrow_right_alt,
-                      color: AppColors.foregroundColor,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            // footer
+                )),
+            //  footer
             Positioned(
               left: screenWidth * 0.1,
               right: screenWidth * 0.06,

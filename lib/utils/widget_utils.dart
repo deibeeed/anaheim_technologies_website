@@ -66,12 +66,14 @@ class HoveredText extends StatefulWidget {
     required this.navigateTo,
     this.textStyle = const TextStyle(fontFamily: 'Plavsky'),
     this.underlineColor = AppColors.foregroundColor,
+    this.alwaysShowIndicator = false,
   });
 
   final String text;
   final Color underlineColor;
   final TextStyle textStyle;
   final String navigateTo;
+  final bool alwaysShowIndicator;
 
   @override
   State<StatefulWidget> createState() {
@@ -93,7 +95,7 @@ class _HoveredTextState extends State<HoveredText> {
         padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
           border: Border(
-            bottom: isHovering
+            bottom: isHovering || widget.alwaysShowIndicator
                 ? BorderSide(color: widget.underlineColor)
                 : BorderSide.none,
           ),

@@ -108,6 +108,7 @@ class AboutUsScreen extends StatelessWidget {
                   const HoveredText(
                     text: 'about us',
                     navigateTo: '/us',
+                    alwaysShowIndicator: true,
                   ),
                   const SizedBox(
                     width: 68,
@@ -120,12 +121,12 @@ class AboutUsScreen extends StatelessWidget {
               ),
             ),
             Positioned(
-              top: 90,
+              top: 80,
               right: screenWidth * 0.08,
-              child: const Text(
-                'hello@anaheimtechnologies.com',
-                style: TextStyle(
-                    fontFamily: 'Plavsky', color: AppColors.whiteColor),
+              child: const HoveredText(
+                text: 'hello@anaheimtechnologies.com',
+                textStyle: TextStyle(fontFamily: 'Plavsky', color: AppColors.whiteColor),
+                navigateTo: '/hello',
               ),
             ),
             // content here
