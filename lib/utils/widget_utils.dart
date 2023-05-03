@@ -63,7 +63,8 @@ class HoveredText extends StatefulWidget {
   const HoveredText({
     super.key,
     required this.text,
-    required this.navigateTo,
+    this.navigateTo,
+    this.onTap,
     this.textStyle = const TextStyle(fontFamily: 'Plavsky'),
     this.underlineColor = AppColors.foregroundColor,
     this.alwaysShowIndicator = false,
@@ -72,8 +73,9 @@ class HoveredText extends StatefulWidget {
   final String text;
   final Color underlineColor;
   final TextStyle textStyle;
-  final String navigateTo;
+  final String? navigateTo;
   final bool alwaysShowIndicator;
+  final VoidCallback? onTap;
 
   @override
   State<StatefulWidget> createState() {
@@ -90,14 +92,22 @@ class _HoveredTextState extends State<HoveredText> {
       onHover: (hovered) {
         setState(() => isHovering = hovered);
       },
-      onTap: () => GoRouter.of(context).go(widget.navigateTo),
+      onTap: () {
+        if (widget.navigateTo != null) {
+          GoRouter.of(context).go(widget.navigateTo!);
+        }
+
+        if (widget.onTap != null) {
+          widget.onTap?.call();
+        }
+      },
       child: Container(
         padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
           border: Border(
             bottom: isHovering || widget.alwaysShowIndicator
                 ? BorderSide(color: widget.underlineColor)
-                : BorderSide.none,
+                : const BorderSide(color: Colors.transparent),
           ),
         ),
         child: Text(

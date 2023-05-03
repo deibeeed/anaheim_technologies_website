@@ -3,6 +3,7 @@ import 'package:anaheim_technologies_website/features/about_us/screen/about_us_s
 import 'package:anaheim_technologies_website/features/contact_us/screen/contact_us_screen.dart';
 import 'package:anaheim_technologies_website/features/home/screen/home_screen.dart';
 import 'package:anaheim_technologies_website/features/privacy/screen/privacy_screen.dart';
+import 'package:anaheim_technologies_website/features/projects/screen/projects_screen.dart';
 import 'package:anaheim_technologies_website/l10n/l10n.dart';
 import 'package:anaheim_technologies_website/utils/color_utils.dart';
 import 'package:flutter/material.dart';
@@ -38,7 +39,13 @@ class App extends StatelessWidget {
       GoRoute(
         path: '/hello',
         builder: (context, state) {
-          return ContactUsScreen();
+          return const ContactUsScreen();
+        },
+      ),
+      GoRoute(
+        path: '/projects',
+        builder: (context, state) {
+          return const ProjectsScreen();
         },
       ),
     ],
