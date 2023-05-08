@@ -133,105 +133,50 @@ class ContactUsScreen extends StatelessWidget {
             Positioned(
               top: screenHeight * 0.2,
               left: screenWidth * 0.25,
-              child: const Text(
-                'Talk to us',
-                style: TextStyle(fontFamily: 'Mechsuit', fontSize: 16),
-              ),
-            ),
-            Positioned(
-              top: screenHeight * 0.28,
-              left: screenWidth * 0.25,
-              child: Text.rich(
-                TextSpan(text: '''
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Text(
+                    'Talk to us',
+                    style: TextStyle(fontFamily: 'Mechsuit', fontSize: 16),
+                  ),
+                  const SizedBox(
+                    height: 32,
+                  ),
+                  Text.rich(
+                    TextSpan(text: '''
 We want to know you more. Please fill out the 
 form. Rest assured that we are collecting your
 data according to the Data Privacy Act of 2012.
 
 Click ''', children: [
-                  TextSpan(
-                      text: 'here',
-                      style: const TextStyle(
-                        color: AppColors.textLinkColor,
+                      TextSpan(
+                          text: 'here',
+                          style: const TextStyle(
+                            color: AppColors.textLinkColor,
+                          ),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              GoRouter.of(context).go('/privacy');
+                            }),
+                      const TextSpan(
+                        text: ' to learn more.',
                       ),
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () {
-                          GoRouter.of(context).go('/privacy');
-                        }),
-                  const TextSpan(
-                    text: ' to learn more.',
+                    ]),
                   ),
-                ]),
-              ),
-            ),
-            Positioned(
-                top: screenHeight * 0.42,
-                left: screenWidth * 0.25,
-                child: SizedBox(
-                  width: screenWidth * 0.18,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const TextField(
-                        style: TextStyle(color: AppColors.textLinkColor),
-                        cursorColor: AppColors.textLinkColor,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: AppColors.textLinkColor,
-                            ),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: AppColors.textLinkColor),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: AppColors.textLinkColor,
-                            ),
-                          ),
-                          label: Text(
-                            'Full name',
-                            style: TextStyle(color: AppColors.textLinkColor),
-                          ),
-                          floatingLabelBehavior: FloatingLabelBehavior.always,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 32,
-                      ),
-                      const TextField(
-                        style: TextStyle(color: AppColors.textLinkColor),
-                        cursorColor: AppColors.textLinkColor,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: AppColors.textLinkColor,
-                            ),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: AppColors.textLinkColor),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: AppColors.textLinkColor,
-                            ),
-                          ),
-                          label: Text(
-                            'Email Address',
-                            style: TextStyle(color: AppColors.textLinkColor),
-                          ),
-                          floatingLabelBehavior: FloatingLabelBehavior.always,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 32,
-                      ),
-                      const TextField(
-                        maxLines: 5,
-                        style: TextStyle(color: AppColors.textLinkColor),
-                        cursorColor: AppColors.textLinkColor,
-                        decoration: InputDecoration(
+                  const SizedBox(
+                    height: 32,
+                  ),
+                  SizedBox(
+                    width: screenWidth * 0.18,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const TextField(
+                          style: TextStyle(color: AppColors.textLinkColor),
+                          cursorColor: AppColors.textLinkColor,
+                          decoration: InputDecoration(
                             border: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: AppColors.textLinkColor,
@@ -239,7 +184,7 @@ Click ''', children: [
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderSide:
-                                  BorderSide(color: AppColors.textLinkColor),
+                              BorderSide(color: AppColors.textLinkColor),
                             ),
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
@@ -247,39 +192,99 @@ Click ''', children: [
                               ),
                             ),
                             label: Text(
-                              'Message',
+                              'Full name',
                               style: TextStyle(color: AppColors.textLinkColor),
                             ),
                             floatingLabelBehavior: FloatingLabelBehavior.always,
-                            hintText: 'How can we help you?',
-                            hintStyle: TextStyle(color: Color(0xFF49454F))),
-                      ),
-                      const SizedBox(
-                        height: 56,
-                      ),
-                      SizedBox(
-                        width: double.infinity,
-                        child: OutlinedButton(
-                          onPressed: () => printd('Submit!!'),
-                          child: const Padding(
-                            padding: EdgeInsets.all(8),
-                            child: Text('Send'),
                           ),
-                          style: OutlinedButton.styleFrom(
-                            foregroundColor: AppColors.textLinkColor,
-                            backgroundColor: AppColors.gradientBottom,
-                            padding: const EdgeInsets.all(16),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(32)),
-                            side: const BorderSide(
-                              color: AppColors.textLinkColor,
+                        ),
+                        const SizedBox(
+                          height: 32,
+                        ),
+                        const TextField(
+                          style: TextStyle(color: AppColors.textLinkColor),
+                          cursorColor: AppColors.textLinkColor,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: AppColors.textLinkColor,
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide:
+                              BorderSide(color: AppColors.textLinkColor),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: AppColors.textLinkColor,
+                              ),
+                            ),
+                            label: Text(
+                              'Email Address',
+                              style: TextStyle(color: AppColors.textLinkColor),
+                            ),
+                            floatingLabelBehavior: FloatingLabelBehavior.always,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 32,
+                        ),
+                        const TextField(
+                          maxLines: 5,
+                          style: TextStyle(color: AppColors.textLinkColor),
+                          cursorColor: AppColors.textLinkColor,
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: AppColors.textLinkColor,
+                                ),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide:
+                                BorderSide(color: AppColors.textLinkColor),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: AppColors.textLinkColor,
+                                ),
+                              ),
+                              label: Text(
+                                'Message',
+                                style: TextStyle(color: AppColors.textLinkColor),
+                              ),
+                              floatingLabelBehavior: FloatingLabelBehavior.always,
+                              hintText: 'How can we help you?',
+                              hintStyle: TextStyle(color: Color(0xFF49454F))),
+                        ),
+                        const SizedBox(
+                          height: 56,
+                        ),
+                        SizedBox(
+                          width: double.infinity,
+                          child: OutlinedButton(
+                            onPressed: () => printd('Submit!!'),
+                            child: const Padding(
+                              padding: EdgeInsets.all(8),
+                              child: Text('Send'),
+                            ),
+                            style: OutlinedButton.styleFrom(
+                              foregroundColor: AppColors.textLinkColor,
+                              backgroundColor: AppColors.gradientBottom,
+                              padding: const EdgeInsets.all(16),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(32)),
+                              side: const BorderSide(
+                                color: AppColors.textLinkColor,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                )),
+                ],
+              )
+            ),
             //  footer
             Positioned(
               left: screenWidth * 0.1,
