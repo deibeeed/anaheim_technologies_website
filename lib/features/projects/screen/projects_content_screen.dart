@@ -33,7 +33,7 @@ class _ProjectsContentState extends State<ProjectsContentScreen> {
               style: TextStyle(fontFamily: 'Mechsuit', fontSize: 16),
             ),
             const SizedBox(
-              height: 56,
+              height: 32,
             ),
             if (showingIndex == null || showingIndex == 0)
               Row(
@@ -186,21 +186,21 @@ how we can help you? ''';
           children: [
             Image.asset(
               'assets/images/pic1.png',
-              height: 190,
+              height: height * 0.35,
             ),
             Positioned(
               top: height * 0.3,
               right: 0,
               child: Image.asset(
                 'assets/images/pic2.png',
-                height: 260,
+                height: height * 0.45,
               ),
             ),
             Positioned(
-              bottom: 0,
+              top: height * 0.5,
               child: Image.asset(
                 'assets/images/pic3.png',
-                height: 208,
+                height: height * 0.35,
               ),
             ),
           ],

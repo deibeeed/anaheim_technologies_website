@@ -18,8 +18,8 @@ class ProjectsScreen extends StatelessWidget {
     var rx0Height = size.height * 0.55;
     var reginleifHeight = size.height * 0.4;
     var strikeFreedomHeight = size.height * 0.62;
-    final screenHeight = size.height;
-    final screenWidth = size.width;
+    var screenHeight = size.height;
+    var screenWidth = size.width;
 
     if (rx0Height > 800) {
       rx0Height = 800.0;
@@ -33,184 +33,198 @@ class ProjectsScreen extends StatelessWidget {
       strikeFreedomHeight = 635;
     }
 
+    if (screenHeight > 2048) {
+      screenHeight = 2048;
+    }
+
+    if (screenWidth > 1920) {
+      screenWidth = 1920;
+    }
+
     return Scaffold(
       body: WidgetUtils.defaultBackground(
         context: context,
-        child: Stack(
-          children: [
-            Positioned(
-              top: screenHeight * 0.09,
-              right: -10,
-              child: SvgPicture.asset(
-                'assets/svg/rx-0-vector.svg',
-                height: rx0Height,
-                colorFilter: ColorFilter.mode(
-                  AppColors.foregroundColor.withOpacity(0.015),
-                  BlendMode.srcIn,
-                ),
-              ),
-            ),
-            Positioned(
-              left: -190,
-              top: screenHeight * 0.6,
-              child: Transform(
-                alignment: Alignment.center,
-                transform: Matrix4.rotationY(math.pi),
-                child: SvgPicture.asset(
-                  'assets/svg/strike-freedom-vector.svg',
-                  height: strikeFreedomHeight,
-                  colorFilter: ColorFilter.mode(
-                    AppColors.foregroundColor.withOpacity(0.015),
-                    BlendMode.srcIn,
+        child: Center(
+          child: SizedBox(
+            width: screenWidth,
+            height: screenHeight,
+            child: Stack(
+              children: [
+                Positioned(
+                  top: screenHeight * 0.09,
+                  right: -10,
+                  child: SvgPicture.asset(
+                    'assets/svg/rx-0-vector.svg',
+                    height: rx0Height,
+                    colorFilter: ColorFilter.mode(
+                      AppColors.foregroundColor.withOpacity(0.015),
+                      BlendMode.srcIn,
+                    ),
                   ),
                 ),
-              ),
-            ),
-            Positioned(
-              left: screenHeight * 0.6,
-              top: screenHeight * 0.75,
-              child: Transform(
-                alignment: Alignment.center,
-                transform: Matrix4.rotationZ(0.28),
-                child: SvgPicture.asset(
-                  'assets/svg/reginleif-vector.svg',
-                  height: reginleifHeight,
-                  colorFilter: ColorFilter.mode(
-                    AppColors.foregroundColor.withOpacity(0.015),
-                    BlendMode.srcIn,
-                  ),
-                ),
-              ),
-            ),
-            // contents here
-            Positioned(
-              top: 56,
-              left: screenWidth * 0.18,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.baseline,
-                textBaseline: TextBaseline.ideographic,
-                children: [
-                  InkWell(
-                    onTap: () => GoRouter.of(context).go('/'),
-                    child: const Text(
-                      'ATO',
-                      style: TextStyle(
-                        fontFamily: 'Mechsuit',
-                        fontSize: 24,
-                        color: AppColors.whiteColor,
+                Positioned(
+                  left: -190,
+                  top: screenHeight * 0.6,
+                  child: Transform(
+                    alignment: Alignment.center,
+                    transform: Matrix4.rotationY(math.pi),
+                    child: SvgPicture.asset(
+                      'assets/svg/strike-freedom-vector.svg',
+                      height: strikeFreedomHeight,
+                      colorFilter: ColorFilter.mode(
+                        AppColors.foregroundColor.withOpacity(0.015),
+                        BlendMode.srcIn,
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    width: 78,
-                  ),
-                  const HoveredText(
-                    text: 'about us',
-                    navigateTo: '/us',
-                  ),
-                  const SizedBox(
-                    width: 68,
-                  ),
-                  const HoveredText(
-                    text: 'projects',
-                    navigateTo: '/projects',
-                    alwaysShowIndicator: true,
-                  ),
-                ],
-              ),
-            ),
-            Positioned(
-              top: 80,
-              right: screenWidth * 0.08,
-              child: const HoveredText(
-                text: 'hello@anaheimtechnologies.com',
-                textStyle: TextStyle(fontFamily: 'Plavsky', color: AppColors.whiteColor),
-                navigateTo: '/hello',
-              ),
-            ),
-            // content here
-            Positioned(
-              top: screenHeight * 0.2,
-              left: screenWidth * 0.25,
-              child: ProjectsContentScreen(),
-            ),
-            //  footer
-            Positioned(
-              left: screenWidth * 0.1,
-              right: screenWidth * 0.06,
-              bottom: 56,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  InkWell(
-                    onTap: () async {
-                      if (await canLaunchUrlString('https://fb.com/anaheim.technologies')) {
-                        launchUrlString('https://fb.com/anaheim.technologies');
-                      }
-                    },
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        SvgPicture.asset(
-                          'assets/svg/facebook.svg',
-                          height: 24,
-                          color: AppColors.foregroundColor,
-                        ),
-                        const SizedBox(
-                          width: 8,
-                        ),
-                        const Text(
-                          'fb.com/anaheim.technologies',
-                        )
-                      ],
+                ),
+                Positioned(
+                  left: screenHeight * 0.6,
+                  top: screenHeight * 0.75,
+                  child: Transform(
+                    alignment: Alignment.center,
+                    transform: Matrix4.rotationZ(0.28),
+                    child: SvgPicture.asset(
+                      'assets/svg/reginleif-vector.svg',
+                      height: reginleifHeight,
+                      colorFilter: ColorFilter.mode(
+                        AppColors.foregroundColor.withOpacity(0.015),
+                        BlendMode.srcIn,
+                      ),
                     ),
                   ),
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.end,
+                ),
+                // contents here
+                Positioned(
+                  top: 56,
+                  left: screenWidth * 0.18,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.baseline,
+                    textBaseline: TextBaseline.ideographic,
                     children: [
-                      SvgPicture.asset(
-                        'assets/svg/internet.svg',
-                        height: 24,
-                        color: AppColors.foregroundColor,
+                      InkWell(
+                        onTap: () => GoRouter.of(context).go('/'),
+                        child: const Text(
+                          'ATO',
+                          style: TextStyle(
+                            fontFamily: 'Mechsuit',
+                            fontSize: 24,
+                            color: AppColors.whiteColor,
+                          ),
+                        ),
                       ),
                       const SizedBox(
-                        width: 8,
+                        width: 78,
                       ),
-                      const Text(
-                        'anaheimtechnologies.com',
-                      )
+                      const HoveredText(
+                        text: 'about us',
+                        navigateTo: '/us',
+                      ),
+                      const SizedBox(
+                        width: 68,
+                      ),
+                      const HoveredText(
+                        text: 'projects',
+                        navigateTo: '/projects',
+                        alwaysShowIndicator: true,
+                      ),
                     ],
                   ),
-                  InkWell(
-                    onTap: () async {
-                      if (await canLaunchUrlString('https://linkedin.com/company/anaheim-technologies')) {
-                        launchUrlString('https://linkedin.com/company/anaheim-technologies');
-                      }
-                    },
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        SvgPicture.asset(
-                          'assets/svg/linkedin.svg',
-                          height: 24,
-                          color: AppColors.foregroundColor,
-                        ),
-                        const SizedBox(
-                          width: 8,
-                        ),
-                        const Text(
-                          'linkedin.com/company/anaheim-technologies',
-                        )
-                      ],
-                    ),
+                ),
+                Positioned(
+                  top: 80,
+                  right: screenWidth * 0.08,
+                  child: const HoveredText(
+                    text: 'hello@anaheimtechnologies.com',
+                    textStyle: TextStyle(fontFamily: 'Plavsky', color: AppColors.whiteColor),
+                    navigateTo: '/hello',
                   ),
-                ],
-              ),
-            )
-          ],
+                ),
+                // content here
+                Positioned(
+                  top: screenHeight * 0.15,
+                  left: screenWidth * 0.25,
+                  child: ProjectsContentScreen(),
+                ),
+                //  footer
+                Positioned(
+                  left: screenWidth * 0.1,
+                  right: screenWidth * 0.06,
+                  bottom: 56,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      InkWell(
+                        onTap: () async {
+                          if (await canLaunchUrlString('https://fb.com/anaheim.technologies')) {
+                            launchUrlString('https://fb.com/anaheim.technologies');
+                          }
+                        },
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            SvgPicture.asset(
+                              'assets/svg/facebook.svg',
+                              height: 24,
+                              color: AppColors.foregroundColor,
+                            ),
+                            const SizedBox(
+                              width: 8,
+                            ),
+                            const Text(
+                              'fb.com/anaheim.technologies',
+                            )
+                          ],
+                        ),
+                      ),
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          SvgPicture.asset(
+                            'assets/svg/internet.svg',
+                            height: 24,
+                            color: AppColors.foregroundColor,
+                          ),
+                          const SizedBox(
+                            width: 8,
+                          ),
+                          const Text(
+                            'anaheimtechnologies.com',
+                          )
+                        ],
+                      ),
+                      InkWell(
+                        onTap: () async {
+                          if (await canLaunchUrlString('https://linkedin.com/company/anaheim-technologies')) {
+                            launchUrlString('https://linkedin.com/company/anaheim-technologies');
+                          }
+                        },
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            SvgPicture.asset(
+                              'assets/svg/linkedin.svg',
+                              height: 24,
+                              color: AppColors.foregroundColor,
+                            ),
+                            const SizedBox(
+                              width: 8,
+                            ),
+                            const Text(
+                              'linkedin.com/company/anaheim-technologies',
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
         ),
       ),
     );
