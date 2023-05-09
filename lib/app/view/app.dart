@@ -1,5 +1,6 @@
 import 'package:anaheim_technologies_website/counter/counter.dart';
 import 'package:anaheim_technologies_website/features/about_us/screen/about_us_screen.dart';
+import 'package:anaheim_technologies_website/features/contact_us/bloc/contact_us_bloc.dart';
 import 'package:anaheim_technologies_website/features/contact_us/screen/contact_us_screen.dart';
 import 'package:anaheim_technologies_website/features/home/screen/home_screen.dart';
 import 'package:anaheim_technologies_website/features/privacy/screen/privacy_screen.dart';
@@ -8,6 +9,7 @@ import 'package:anaheim_technologies_website/l10n/l10n.dart';
 import 'package:anaheim_technologies_website/utils/color_utils.dart';
 import 'package:anaheim_technologies_website/utils/router_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -59,7 +61,7 @@ class App extends StatelessWidget {
           return buildPageWithDefaultTransition<void>(
             context: context,
             state: state,
-            child: const ContactUsScreen(),
+            child: ContactUsScreen(),
           );
         },
       ),
@@ -78,19 +80,22 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      routerConfig: _rootRouter,
-      theme: ThemeData(
-          appBarTheme: const AppBarTheme(color: Color(0xFF13B9FF)),
-          colorScheme: ColorScheme.fromSwatch(
-            accentColor: const Color(0xFF13B9FF),
-          ),
-          textTheme: GoogleFonts.notoSansTextTheme().apply(
-            bodyColor: AppColors.foregroundColor,
-            displayColor: AppColors.foregroundColor,
-          )),
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
+    return BlocProvider.value(
+      value: ContactUsBloc(),
+      child: MaterialApp.router(
+        routerConfig: _rootRouter,
+        theme: ThemeData(
+            appBarTheme: const AppBarTheme(color: Color(0xFF13B9FF)),
+            colorScheme: ColorScheme.fromSwatch(
+              accentColor: const Color(0xFF13B9FF),
+            ),
+            textTheme: GoogleFonts.notoSansTextTheme().apply(
+              bodyColor: AppColors.foregroundColor,
+              displayColor: AppColors.foregroundColor,
+            )),
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+      ),
     );
   }
 }
