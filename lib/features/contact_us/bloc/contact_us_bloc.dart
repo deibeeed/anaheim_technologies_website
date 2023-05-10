@@ -48,6 +48,7 @@ class ContactUsBloc extends Bloc<ContactUsEvent, ContactUsState> {
         'email_address': event.email,
         'full_name': event.fullName,
         'message': event.message,
+        'inquired_on': DateTime.now().millisecondsSinceEpoch
       });
 
       _isSendingEmail = false;
