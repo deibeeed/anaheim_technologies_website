@@ -22,7 +22,7 @@ dependencies:
   google_fonts: ^4.0.4
   intl: ^0.17.0
   logging: ^1.1.1
-  url_launcher: ^6.1.10
+  url_launcher: ^6.1.11
 
 dev_dependencies:
   bloc_test: ^9.1.0
