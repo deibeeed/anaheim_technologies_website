@@ -201,7 +201,7 @@ We want to know you more. Please fill out the
 form. Rest assured that we are collecting your
 data according to the Data Privacy Act of 2012.
 
-Click ''', children: [
+Click ''', style: TextStyle(height: 1.5), children: [
                               TextSpan(
                                   text: 'here',
                                   style: const TextStyle(

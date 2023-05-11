@@ -151,7 +151,7 @@ how we can help you? ''';
     }
 
     return Text.rich(
-      TextSpan(text: detailText, children: [
+      TextSpan(text: detailText, style: TextStyle(height: 1.5,), children: [
         TextSpan(
             text: 'Talk to us today!',
             style: const TextStyle(

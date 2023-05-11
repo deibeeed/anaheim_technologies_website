@@ -182,7 +182,9 @@ We are ready to be your partners in creating solutions to your
 software development and IoT prototyping needs.
 
 Let us help you. ''',
-                            children: [
+                            style: TextStyle(
+                              height: 1.5,
+                            ), children: [
                               TextSpan(
                                   text: 'Talk to us today!',
                                   style: const TextStyle(
