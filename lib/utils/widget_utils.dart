@@ -102,7 +102,7 @@ class _HoveredTextState extends State<HoveredText> {
         }
       },
       child: Container(
-        padding: const EdgeInsets.all(8),
+        padding: const EdgeInsets.all(4),
         decoration: BoxDecoration(
           border: Border(
             bottom: isHovering || widget.alwaysShowIndicator

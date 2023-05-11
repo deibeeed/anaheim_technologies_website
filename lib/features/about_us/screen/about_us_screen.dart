@@ -126,6 +126,13 @@ class AboutUsScreen extends StatelessWidget {
                         width: 68,
                       ),
                       const HoveredText(
+                        text: 'services',
+                        navigateTo: '/services',
+                      ),
+                      const SizedBox(
+                        width: 68,
+                      ),
+                      const HoveredText(
                         text: 'projects',
                         navigateTo: '/projects',
                       ),

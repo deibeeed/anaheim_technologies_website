@@ -5,6 +5,7 @@ import 'package:anaheim_technologies_website/features/contact_us/screen/contact_
 import 'package:anaheim_technologies_website/features/home/screen/home_screen.dart';
 import 'package:anaheim_technologies_website/features/privacy/screen/privacy_screen.dart';
 import 'package:anaheim_technologies_website/features/projects/screen/projects_screen.dart';
+import 'package:anaheim_technologies_website/features/services/screen/services_screen.dart';
 import 'package:anaheim_technologies_website/l10n/l10n.dart';
 import 'package:anaheim_technologies_website/utils/color_utils.dart';
 import 'package:anaheim_technologies_website/utils/router_utils.dart';
@@ -72,6 +73,16 @@ class App extends StatelessWidget {
             context: context,
             state: state,
             child: const ProjectsScreen(),
+          );
+        },
+      ),
+      GoRoute(
+        path: '/services',
+        pageBuilder: (context, state) {
+          return buildPageWithDefaultTransition<void>(
+            context: context,
+            state: state,
+            child: const ServicesScreen(),
           );
         },
       ),
