@@ -1,5 +1,5 @@
 name: anaheim_technologies_website
-description: A Very Good Project created by Very Good CLI.
+description: Anaheim Technologies website.
 version: 1.0.0+1
 publish_to: none
 
@@ -15,6 +15,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.1
+  flutter_launcher_icons: 0.13.1
   flutter_localizations:
     sdk: flutter
   flutter_svg: ^2.0.5
@@ -45,3 +46,10 @@ flutter:
     - family: Mechsuit
       fonts:
         - asset: fonts/Mechsuit.otf
+
+flutter_launcher_icons:
+  web:
+    generate: true
+    image_path: "assets/images/logo.png"
+    background_color: "#FFF"
+    theme_color: "#FFF"
