@@ -5,6 +5,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 
 class MasterDetailScreen extends StatefulWidget {
@@ -36,79 +37,83 @@ class _MasterDetailState extends State<MasterDetailScreen> {
     final screenSize = MediaQuery.of(context).size;
 
     return Row(
-      mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              widget.title,
-              style: const TextStyle(fontFamily: 'Mechsuit', fontSize: 16),
-            ),
-            const SizedBox(
-              height: 32,
-            ),
-            ...widget.titleList.mapIndexed((index, element) {
-              return Visibility(
-                  visible: widget.showAllTitleList
-                      ? true
-                      : showingIndex == null || showingIndex == index,
-                  child: Padding(
-                    padding: EdgeInsets.only(bottom: 16),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        HoveredText(
-                          text: element,
-                          alwaysShowIndicator: showingIndex == index,
-                          onTap: () {
-                            setState(() {
-                              if (!widget.showAllTitleList &&
-                                  showingIndex != null) {
-                                showingIndex = null;
-                                return;
-                              }
-
-                              showingIndex = index;
-                            });
-                          },
-                        ),
-                        if (widget.narrativeList.isNotEmpty)
-                          Icon(
-                            showingIndex != null
-                                ? Icons.arrow_right_rounded
-                                : Icons.arrow_drop_down_rounded,
-                            color: AppColors.foregroundColor,
-                          ),
-                      ],
-                    ),
-                  ));
-            }),
-            if (showingIndex != null && widget.narrativeList.isNotEmpty) ...[
+        Expanded(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                widget.title,
+                style: const TextStyle(fontFamily: 'Mechsuit', fontSize: 24),
+              ),
               const SizedBox(
-                height: 20,
+                height: 32,
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 16),
-                child: _showDetailNarrative(
-                  detailText: widget.narrativeList[showingIndex!],
+              ...widget.titleList.mapIndexed((index, element) {
+                return Visibility(
+                    visible: widget.showAllTitleList
+                        ? true
+                        : showingIndex == null || showingIndex == index,
+                    child: Padding(
+                      padding: EdgeInsets.only(bottom: 16),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          HoveredText(
+                            text: element,
+                            alwaysShowIndicator: showingIndex == index,
+                            onTap: () {
+                              setState(() {
+                                if (!widget.showAllTitleList &&
+                                    showingIndex != null) {
+                                  showingIndex = null;
+                                  return;
+                                }
+
+                                showingIndex = index;
+                              });
+                            },
+                          ),
+                          if (widget.narrativeList.isNotEmpty)
+                            Icon(
+                              showingIndex != null
+                                  ? Icons.arrow_right_rounded
+                                  : Icons.arrow_drop_down_rounded,
+                              color: AppColors.foregroundColor,
+                            ),
+                        ],
+                      ),
+                    ));
+              }),
+              if (showingIndex != null && widget.narrativeList.isNotEmpty) ...[
+                const SizedBox(
+                  height: 20,
                 ),
-              ),
-            ]
-          ],
+                Padding(
+                  padding: const EdgeInsets.only(left: 16),
+                  child: _showDetailNarrative(
+                    detailText: widget.narrativeList[showingIndex!],
+                  ),
+                ),
+              ]
+            ],
+          ),
         ),
         if (showingIndex != null) ...[
-          SizedBox(
-            width: screenSize.width * 0.06,
-          ),
-          Padding(
-            padding: widget.detailListPaddingTop == null
-                ? EdgeInsets.zero
-                : EdgeInsets.only(top: widget.detailListPaddingTop!),
-            child: widget.detailList[showingIndex!],
+          Gap(32),
+          Expanded(
+            child: Padding(
+              padding: widget.detailListPaddingTop == null
+                  ? EdgeInsets.zero
+                  : EdgeInsets.only(
+                      top: widget.detailListPaddingTop!,
+                    ),
+              child: widget.detailList[showingIndex!],
+            ),
           ),
         ],
       ],
