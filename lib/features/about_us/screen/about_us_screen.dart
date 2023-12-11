@@ -1,14 +1,8 @@
 import 'package:anaheim_technologies_website/utils/color_utils.dart';
-import 'package:anaheim_technologies_website/utils/print_utils.dart';
-import 'package:anaheim_technologies_website/utils/widget_utils.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
-import 'dart:math' as math;
 
-import 'package:google_fonts/google_fonts.dart';
-import 'package:url_launcher/url_launcher_string.dart';
 
 class AboutUsScreen extends StatelessWidget {
   const AboutUsScreen({super.key});
