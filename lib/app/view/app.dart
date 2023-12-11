@@ -2,7 +2,6 @@ import 'package:anaheim_technologies_website/features/about_us/screen/about_us_s
 import 'package:anaheim_technologies_website/features/contact_us/bloc/contact_us_bloc.dart';
 import 'package:anaheim_technologies_website/features/contact_us/screen/contact_us_screen.dart';
 import 'package:anaheim_technologies_website/features/home/screen/home_screen.dart';
-import 'package:anaheim_technologies_website/features/home/screen/home_screen2.dart';
 import 'package:anaheim_technologies_website/features/home/screen/home_screen_content.dart';
 import 'package:anaheim_technologies_website/features/privacy/screen/privacy_screen.dart';
 import 'package:anaheim_technologies_website/features/projects/screen/projects_screen.dart';
@@ -93,7 +92,7 @@ class App extends StatelessWidget {
           ),
         ],
         builder: (context, state, child) {
-          return HomeScreen2(child: child);
+          return HomeScreen(child: child);
         }
       ),
     ],

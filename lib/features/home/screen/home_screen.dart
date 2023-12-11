@@ -1,335 +1,273 @@
+import 'package:anaheim_technologies_website/features/home/cubit/menu_selection_cubit.dart';
+import 'package:anaheim_technologies_website/features/home/cubit/service_select_cubit.dart';
 import 'package:anaheim_technologies_website/utils/color_utils.dart';
-import 'package:anaheim_technologies_website/utils/print_utils.dart';
+import 'package:anaheim_technologies_website/utils/constants.dart';
 import 'package:anaheim_technologies_website/utils/widget_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
-import 'dart:math' as math;
-
-import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  final Widget child;
+
+  HomeScreen({
+    required this.child,
+  });
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    var rx0Height = size.height * 0.55;
-    var strikeFreedomHeight = size.height * 0.62;
-    var reginleifHeight = size.height * 0.4;
-    var screenHeight = size.height * 2;
-    var screenWidth = size.width;
-    var centerPieceHeight = screenHeight * 0.47;
+    const maxWidth = 1000.0;
 
-    if (rx0Height > 800) {
-      rx0Height = 800.0;
-    }
-
-    if (reginleifHeight > 650) {
-      reginleifHeight = 650.0;
-    }
-
-    if (centerPieceHeight > 954) {
-      centerPieceHeight = 954;
-    }
-
-    if (strikeFreedomHeight > 635) {
-      strikeFreedomHeight = 635;
-    }
-
-    if (screenHeight > 2048) {
-      screenHeight = 2048;
-    }
-
-    if (screenWidth > 1920) {
-      screenWidth = 1920;
-    }
-
-    printd('screenHeight: $screenHeight, screenWidth: $screenWidth');
-
-    return Scaffold(
-      body: WidgetUtils.extendedBackground(
-        context: context,
-        height: screenHeight,
-        child: Center(
-          child: SizedBox(
-            width: screenWidth,
-            height: screenHeight,
-            child: Stack(
-              children: [
-                Positioned(
-                  top: screenHeight * 0.09,
-                  right: -10,
-                  child: SvgPicture.asset(
-                    'assets/svg/rx-0-vector.svg',
-                    height: rx0Height,
-                    colorFilter: ColorFilter.mode(
-                      AppColors.foregroundColor.withOpacity(0.015),
-                      BlendMode.srcIn,
-                    ),
-                  ),
-                ),
-                Positioned(
-                  left: -190,
-                  top: screenHeight * 0.32,
-                  child: Transform(
-                    alignment: Alignment.center,
-                    transform: Matrix4.rotationY(math.pi),
-                    child: SvgPicture.asset(
-                      'assets/svg/strike-freedom-vector.svg',
-                      height: strikeFreedomHeight,
-                      colorFilter: ColorFilter.mode(
-                        AppColors.foregroundColor.withOpacity(0.015),
-                        BlendMode.srcIn,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => ServiceSelectCubit(),
+        ),
+        BlocProvider(
+          create: (context) => MenuSelectionCubit(),
+        ),
+      ],
+      child: Scaffold(
+        body: WidgetUtils.defaultBackground(
+          context: context,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 32),
+            child: Center(
+              child: SizedBox(
+                width: maxWidth,
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        top: 56,
                       ),
+                      child: _buildMenu(),
                     ),
-                  ),
-                ),
-                Positioned(
-                  right: -screenHeight * 0.18,
-                  top: screenHeight * 0.75,
-                  child: Transform(
-                    alignment: Alignment.center,
-                    transform: Matrix4.rotationZ(0.28),
-                    child: SvgPicture.asset(
-                      'assets/svg/reginleif-vector.svg',
-                      height: reginleifHeight,
-                      colorFilter: ColorFilter.mode(
-                        AppColors.foregroundColor.withOpacity(0.015),
-                        BlendMode.srcIn,
-                      ),
-                    ),
-                  ),
-                ),
-                // contents here
-                Positioned(
-                  top: 56,
-                  left: screenWidth * 0.18,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.baseline,
-                    textBaseline: TextBaseline.ideographic,
-                    children: [
-                      InkWell(
-                        onTap: () => GoRouter.of(context).go('/'),
-                        child: const Text(
-                          'ATO',
-                          style: TextStyle(
-                            fontFamily: 'Mechsuit',
-                            fontSize: 24,
-                            color: AppColors.whiteColor,
-                          ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                          top: 96,
                         ),
-                      ),
-                      const SizedBox(
-                        width: 78,
-                      ),
-                      const HoveredText(
-                        text: 'about us',
-                        navigateTo: '/us',
-                      ),
-                      const SizedBox(
-                        width: 68,
-                      ),
-                      const HoveredText(
-                        text: 'services',
-                        navigateTo: '/services',
-                      ),
-                      const SizedBox(
-                        width: 68,
-                      ),
-                      const HoveredText(
-                        text: 'projects',
-                        navigateTo: '/projects',
-                      ),
-                    ],
-                  ),
-                ),
-                Positioned(
-                  top: 80,
-                  right: screenWidth * 0.08,
-                  child: const HoveredText(
-                    text: 'hello@anaheimtechnologies.com',
-                    textStyle: TextStyle(
-                        fontFamily: 'Plavsky', color: AppColors.whiteColor),
-                    navigateTo: '/hello',
-                  ),
-                ),
-                Positioned(
-                  top: screenHeight * 0.12,
-                  left: screenWidth * 0.22,
-                  child: const Text(
-                    'Ideas - \nDelivered.',
-                    style: TextStyle(
-                        fontFamily: 'Plavsky',
-                        color: AppColors.whiteColor,
-                        fontSize: 56),
-                  ),
-                ),
-                Positioned(
-                  top: screenHeight * 0.22,
-                  left: screenWidth * 0.22,
-                  child: OutlinedButton(
-                    onPressed: () => GoRouter.of(context).go('/hello'),
-                    style: OutlinedButton.styleFrom(
-                      foregroundColor: AppColors.foregroundColor,
-                      padding: const EdgeInsets.all(16),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(4)),
-                      side: const BorderSide(
-                        color: AppColors.foregroundColor,
+                        child: child,
                       ),
                     ),
-                    child: Row(
-                      children: [
-                        Text('Talk to us',
-                            style: GoogleFonts.notoSans(fontSize: 16)),
-                        const SizedBox(
-                          width: 8,
+                    if (GoRouter.of(context).location != '/')
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 56,
                         ),
-                        const Icon(
-                          Icons.arrow_right_alt,
-                          color: AppColors.foregroundColor,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                Center(
-                  child: SvgPicture.asset(
-                    'assets/svg/center_piece_with_words.svg',
-                    height: centerPieceHeight,
-                  ),
-                ),
-                Positioned(
-                  bottom: screenHeight * 0.18,
-                  child: SizedBox(
-                    width: screenWidth,
-                    child: const Center(
-                      child: Text(
-                        'Are you ready to co-create with us? Let’s connect!',
-                        style: TextStyle(fontSize: 32),
-                      ),
-                    ),
-                  ),
-                ),
-                Positioned(
-                  bottom: screenHeight * 0.13,
-                  child: SizedBox(
-                    width: screenWidth,
-                    child: Center(
-                      child: OutlinedButton(
-                        onPressed: () => GoRouter.of(context).go('/hello'),
-                        style: OutlinedButton.styleFrom(
-                            foregroundColor: AppColors.foregroundColor,
-                            padding: const EdgeInsets.all(16),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(4)),
-                            side: const BorderSide(
-                              color: AppColors.foregroundColor,
-                            )),
                         child: Row(
-                          mainAxisSize: MainAxisSize.min,
                           children: [
-                            Text('Talk to us today!',
-                                style: GoogleFonts.notoSans(fontSize: 16)),
-                            const SizedBox(
-                              width: 8,
+                            InkWell(
+                              onTap: () => GoRouter.of(context).go('/'),
+                              child: const Text(
+                                'ATO',
+                                style: TextStyle(
+                                  fontFamily: 'Mechsuit',
+                                  fontSize: 24,
+                                  color: AppColors.whiteColor,
+                                ),
+                              ),
                             ),
-                            const Icon(
-                              Icons.arrow_right_alt,
-                              color: AppColors.foregroundColor,
+                            const Spacer(),
+                            InkWell(
+                              onTap: () async {
+                                if (await canLaunchUrlString(
+                                    'https://fb.com/anaheim.technologies')) {
+                                  launchUrlString(
+                                      'https://fb.com/anaheim.technologies');
+                                }
+                              },
+                              child: SvgPicture.asset(
+                                'assets/svg/facebook.svg',
+                                height: 24,
+                                color: AppColors.foregroundColor,
+                              ),
+                            ),
+                            const Gap(16),
+                            InkWell(
+                              onTap: () async {
+                                if (await canLaunchUrlString(
+                                    'https://linkedin.com/company/anaheim-technologies')) {
+                                  launchUrlString(
+                                      'https://linkedin.com/company/anaheim-technologies');
+                                }
+                              },
+                              child: SvgPicture.asset(
+                                'assets/svg/linkedin.svg',
+                                height: 24,
+                                color: AppColors.foregroundColor,
+                              ),
                             ),
                           ],
                         ),
                       ),
-                    ),
-                  ),
+                  ],
                 ),
-                // footer
-                Positioned(
-                  left: screenWidth * 0.1,
-                  right: screenWidth * 0.06,
-                  bottom: 56,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      InkWell(
-                        onTap: () async {
-                          if (await canLaunchUrlString(
-                              'https://fb.com/anaheim.technologies')) {
-                            launchUrlString('https://fb.com/anaheim.technologies');
-                          }
-                        },
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            SvgPicture.asset(
-                              'assets/svg/facebook.svg',
-                              height: 24,
-                              color: AppColors.foregroundColor,
-                            ),
-                            const SizedBox(
-                              width: 8,
-                            ),
-                            const Text(
-                              'fb.com/anaheim.technologies',
-                            )
-                          ],
-                        ),
-                      ),
-                      Row(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          SvgPicture.asset(
-                            'assets/svg/internet.svg',
-                            height: 24,
-                            color: AppColors.foregroundColor,
-                          ),
-                          const SizedBox(
-                            width: 8,
-                          ),
-                          const Text(
-                            'anaheimtechnologies.com',
-                          )
-                        ],
-                      ),
-                      InkWell(
-                        onTap: () async {
-                          if (await canLaunchUrlString(
-                              'https://linkedin.com/company/anaheim-technologies')) {
-                            launchUrlString(
-                                'https://linkedin.com/company/anaheim-technologies');
-                          }
-                        },
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            SvgPicture.asset(
-                              'assets/svg/linkedin.svg',
-                              height: 24,
-                              color: AppColors.foregroundColor,
-                            ),
-                            const SizedBox(
-                              width: 8,
-                            ),
-                            const Text(
-                              'linkedin.com/company/anaheim-technologies',
-                            )
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                )
-              ],
+              ),
             ),
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildMenu() {
+    if (!Constants.isExpandedScreen) {
+      return BlocBuilder<MenuSelectionCubit, int>(builder: (context, state) {
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            InkWell(
+              onTap: () {
+                context.read<MenuSelectionCubit>().selectNone();
+                GoRouter.of(context).go('/');
+              },
+              child: const Text(
+                'ATO',
+                style: TextStyle(
+                  fontFamily: 'Mechsuit',
+                  fontSize: 32,
+                  color: AppColors.whiteColor,
+                ),
+              ),
+            ),
+            PopupMenuButton(
+              onSelected: (value) {
+                switch (value) {
+                  case 1:
+                    context.read<MenuSelectionCubit>().selectAbout();
+                    GoRouter.of(context).go('/us');
+                    break;
+                  case 2:
+                    context.read<MenuSelectionCubit>().selectServices();
+                    GoRouter.of(context).go('/services');
+                    break;
+                  case 3:
+                    context.read<MenuSelectionCubit>().selectProjects();
+                    GoRouter.of(context).go('/projects');
+                    break;
+                  case 4:
+                    context.read<MenuSelectionCubit>().selectContactUs();
+                    GoRouter.of(context).go('/contact');
+                    break;
+                }
+              },
+              initialValue: state,
+              itemBuilder: (context) {
+                return [
+                  const PopupMenuItem(
+                    value: 1,
+                    child: Text(
+                      'about us',
+                      style: TextStyle(fontFamily: 'Plavsky'),
+                    ),
+                  ),
+                  const PopupMenuItem(
+                    value: 2,
+                    child: Text(
+                      'services',
+                      style: TextStyle(fontFamily: 'Plavsky'),
+                    ),
+                  ),
+                  const PopupMenuItem(
+                    value: 3,
+                    child: Text(
+                      'projects',
+                      style: TextStyle(fontFamily: 'Plavsky'),
+                    ),
+                  ),
+                  const PopupMenuItem(
+                    value: 4,
+                    child: Text(
+                      'contact  us',
+                      style: TextStyle(fontFamily: 'Plavsky'),
+                    ),
+                  ),
+                ];
+              },
+              child: const Icon(
+                Icons.menu_rounded,
+                color: Colors.white,
+              ),
+            ),
+          ],
+        );
+      });
+    }
+    return BlocBuilder<MenuSelectionCubit, int>(
+      builder: (context, state) {
+        return Row(
+          crossAxisAlignment: CrossAxisAlignment.baseline,
+          textBaseline: TextBaseline.ideographic,
+          children: [
+            InkWell(
+              onTap: () {
+                context.read<MenuSelectionCubit>().selectNone();
+                GoRouter.of(context).go('/');
+              },
+              child: const Text(
+                'ATO',
+                style: TextStyle(
+                  fontFamily: 'Mechsuit',
+                  fontSize: 32,
+                  color: AppColors.whiteColor,
+                ),
+              ),
+            ),
+            Expanded(child: Container()),
+            HoveredText(
+              text: 'about us',
+              navigateTo: '/us',
+              alwaysShowIndicator:
+                  context.read<MenuSelectionCubit>().isAboutSelected,
+              onTap: () {
+                context.read<MenuSelectionCubit>().selectAbout();
+              },
+            ),
+            const SizedBox(
+              width: 32,
+            ),
+            HoveredText(
+              text: 'services',
+              navigateTo: '/services',
+              alwaysShowIndicator:
+                  context.read<MenuSelectionCubit>().isServicesSelected,
+              onTap: () {
+                context.read<MenuSelectionCubit>().selectServices();
+              },
+            ),
+            const SizedBox(
+              width: 32,
+            ),
+            HoveredText(
+              text: 'projects',
+              navigateTo: '/projects',
+              alwaysShowIndicator:
+                  context.read<MenuSelectionCubit>().isProjectsSelected,
+              onTap: () {
+                context.read<MenuSelectionCubit>().selectProjects();
+              },
+            ),
+            const SizedBox(
+              width: 32,
+            ),
+            HoveredText(
+              text: 'contact us',
+              navigateTo: '/contact',
+              alwaysShowIndicator:
+                  context.read<MenuSelectionCubit>().isContactUsSelected,
+              onTap: () {
+                context.read<MenuSelectionCubit>().selectContactUs();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }
