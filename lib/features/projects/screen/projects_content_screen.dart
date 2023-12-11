@@ -9,14 +9,16 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 
 class MasterDetailScreen extends StatefulWidget {
-  const MasterDetailScreen({super.key,
+  const MasterDetailScreen({
+    super.key,
     required this.title,
     required this.titleList,
     required this.detailList,
     this.narrativeList = const [],
     this.showAllTitleList = false,
     this.detailListPaddingTop,
-    this.filledIndicator = false,});
+    this.filledIndicator = false,
+  });
 
   final String title;
   final List<String> titleList;
@@ -35,80 +37,93 @@ class _MasterDetailState extends State<MasterDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery
-        .of(context)
-        .size;
+    final screenSize = MediaQuery.of(context).size;
 
-    return Row(
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
+        Text(
+          widget.title,
+          style: const TextStyle(fontFamily: 'Mechsuit', fontSize: 24),
+        ),
+        const SizedBox(
+          height: 32,
+        ),
         Expanded(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
+          child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                widget.title,
-                style: const TextStyle(fontFamily: 'Mechsuit', fontSize: 24),
-              ),
-              const SizedBox(
-                height: 32,
-              ),
-              ...widget.titleList.mapIndexed((index, element) {
-                return Visibility(
-                    visible: widget.showAllTitleList
-                        ? true
-                        : showingIndex == null || showingIndex == index,
-                    child: Padding(
-                      padding: EdgeInsets.only(bottom: 16),
-                      child: SizedBox(
-                        width: widget.filledIndicator ? double.infinity : null,
-                        child: HoveredText(
-                          text: element,
-                          alwaysShowIndicator: showingIndex == index,
-                          onTap: () {
-                            setState(() {
-                              if (!widget.showAllTitleList &&
-                                  showingIndex != null) {
-                                showingIndex = null;
-                                return;
-                              }
+              Expanded(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ...widget.titleList.mapIndexed((index, element) {
+                      return Visibility(
+                          visible: widget.showAllTitleList
+                              ? true
+                              : showingIndex == null || showingIndex == index,
+                          child: Padding(
+                            padding: EdgeInsets.only(bottom: 16),
+                            child: SizedBox(
+                              width: widget.filledIndicator
+                                  ? double.infinity
+                                  : null,
+                              child: HoveredText(
+                                text: element,
+                                alwaysShowIndicator: showingIndex == index,
+                                onTap: () {
+                                  setState(() {
+                                    if (!widget.showAllTitleList &&
+                                        showingIndex != null) {
+                                      showingIndex = null;
+                                      return;
+                                    }
 
-                              showingIndex = index;
-                            });
-                          },
-                          textStyle: const TextStyle(
-                            fontFamily: 'Plavsky', fontSize: 24,),
-                          filledIndicator: widget.filledIndicator,
-                        ),
+                                    showingIndex = index;
+                                  });
+                                },
+                                textStyle: const TextStyle(
+                                  fontFamily: 'Plavsky',
+                                  fontSize: 24,
+                                ),
+                                filledIndicator: widget.filledIndicator,
+                              ),
+                            ),
+                          ));
+                    }),
+                    if (showingIndex != null &&
+                        widget.narrativeList.isNotEmpty) ...[
+                      const SizedBox(
+                        height: 20,
                       ),
-                    ));
-              }),
-              if (showingIndex != null && widget.narrativeList.isNotEmpty) ...[
-                const SizedBox(
-                  height: 20,
+                      Expanded(
+                          child: SingleChildScrollView(
+                        child: _showDetailNarrative(
+                          detailText: widget.narrativeList[showingIndex!],
+                        ),
+                      )),
+                    ]
+                  ],
                 ),
-                _showDetailNarrative(
-                  detailText: widget.narrativeList[showingIndex!],
+              ),
+              if (showingIndex != null && widget.detailList.isNotEmpty) ...[
+                Gap(32),
+                Expanded(
+                  child: Padding(
+                    padding: widget.detailListPaddingTop == null
+                        ? EdgeInsets.zero
+                        : EdgeInsets.only(
+                            top: widget.detailListPaddingTop!,
+                          ),
+                    child: widget.detailList[showingIndex!],
+                  ),
                 ),
-              ]
+              ],
             ],
           ),
-        ),
-        if (showingIndex != null) ...[
-          Gap(32),
-          Expanded(
-            child: Padding(
-              padding: widget.detailListPaddingTop == null
-                  ? EdgeInsets.zero
-                  : EdgeInsets.only(
-                top: widget.detailListPaddingTop!,
-              ),
-              child: widget.detailList[showingIndex!],
-            ),
-          ),
-        ],
+        )
       ],
     );
   }

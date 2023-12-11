@@ -1,5 +1,6 @@
 import 'package:anaheim_technologies_website/features/home/cubit/service_select_cubit.dart';
 import 'package:anaheim_technologies_website/utils/color_utils.dart';
+import 'package:anaheim_technologies_website/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -25,10 +26,25 @@ class HomeScreenContent extends StatelessWidget {
                   ),
                 ),
               ),
-              Expanded(
-                child: Container(),
-              ),
-              const Text(
+              if (Constants.isExpandedScreen) ...[
+                Expanded(
+                  child: Container(),
+                ),
+                const Text(
+                  '''Ideas -
+Delivered''',
+                  style: TextStyle(
+                      fontFamily: 'Plavsky',
+                      color: Colors.white,
+                      fontSize: 48),
+                ),
+              ],
+            ],
+          ),
+          if (!Constants.isExpandedScreen)
+            const SizedBox(
+              width: double.infinity,
+              child: Text(
                 '''Ideas -
 Delivered''',
                 style: TextStyle(
@@ -36,8 +52,7 @@ Delivered''',
                     color: Colors.white,
                     fontSize: 48),
               ),
-            ],
-          ),
+            ),
           Padding(
             padding: const EdgeInsets.only(top: 48),
             child: Row(
@@ -100,78 +115,7 @@ Delivered''',
                     )),
               ),
               child: BlocBuilder<ServiceSelectCubit, int>(
-                builder: (context, state) {
-                  return Row(
-                    children: [
-                      FilledButton(
-                        onPressed: () {
-                          context
-                              .read<ServiceSelectCubit>()
-                              .selectBranding();
-                        },
-                        style: FilledButton.styleFrom(
-                          padding:
-                          const EdgeInsets.symmetric(
-                            vertical: 20,
-                            horizontal: 24,
-                          ),
-                          backgroundColor: state == 0
-                              ? AppColors.textLinkColor
-                              : Colors.transparent,
-                          foregroundColor: state == 0
-                              ? AppColors.gradientBottom
-                              : AppColors.textLinkColor,
-                          shape:
-                          const RoundedRectangleBorder(
-                              borderRadius:
-                              BorderRadius.only(
-                                topLeft: Radius.circular(8),
-                                topRight: Radius.circular(8),
-                              )),
-                        ),
-                        child: const Text(
-                          'Branding',
-                          style: TextStyle(
-                            fontSize: 24,
-                          ),
-                        ),
-                      ),
-                      FilledButton(
-                        onPressed: () {
-                          context
-                              .read<ServiceSelectCubit>()
-                              .selectPdd();
-                        },
-                        style: FilledButton.styleFrom(
-                          padding:
-                          const EdgeInsets.symmetric(
-                            vertical: 20,
-                            horizontal: 24,
-                          ),
-                          backgroundColor: state == 1
-                              ? AppColors.textLinkColor
-                              : Colors.transparent,
-                          foregroundColor: state == 1
-                              ? AppColors.gradientBottom
-                              : AppColors.textLinkColor,
-                          shape:
-                          const RoundedRectangleBorder(
-                              borderRadius:
-                              BorderRadius.only(
-                                topLeft: Radius.circular(8),
-                                topRight: Radius.circular(8),
-                              )),
-                        ),
-                        child: const Text(
-                          'Product design and development',
-                          style: TextStyle(
-                            fontSize: 24,
-                          ),
-                        ),
-                      ),
-                    ],
-                  );
-                },
+                builder: _buildServiceMenu,
               ),
             ),
           ),
@@ -203,6 +147,7 @@ Delivered''',
             ),
             child: Text(
               'Are you ready to co-create with us?',
+              textAlign: TextAlign.center,
               style: TextStyle(
                 fontFamily: 'Plavsky',
                 fontSize: 32,
@@ -299,4 +244,93 @@ Delivered''',
     );
   }
 
+  Widget _buildServiceMenu(BuildContext context, int state) {
+    final buttons = [
+      FilledButton(
+        onPressed: () {
+          context
+              .read<ServiceSelectCubit>()
+              .selectBranding();
+        },
+        style: FilledButton.styleFrom(
+          padding:
+          const EdgeInsets.symmetric(
+            vertical: 20,
+            horizontal: 24,
+          ),
+          backgroundColor: state == 0
+              ? AppColors.textLinkColor
+              : Colors.transparent,
+          foregroundColor: state == 0
+              ? AppColors.gradientBottom
+              : AppColors.textLinkColor,
+          shape:
+          const RoundedRectangleBorder(
+              borderRadius:
+              BorderRadius.only(
+                topLeft: Radius.circular(8),
+                topRight: Radius.circular(8),
+              )),
+        ),
+        child: const Text(
+          'Branding',
+          style: TextStyle(
+            fontSize: 24,
+          ),
+        ),
+      ),
+      FilledButton(
+        onPressed: () {
+          context
+              .read<ServiceSelectCubit>()
+              .selectPdd();
+        },
+        style: FilledButton.styleFrom(
+          padding:
+          const EdgeInsets.symmetric(
+            vertical: 20,
+            horizontal: 24,
+          ),
+          backgroundColor: state == 1
+              ? AppColors.textLinkColor
+              : Colors.transparent,
+          foregroundColor: state == 1
+              ? AppColors.gradientBottom
+              : AppColors.textLinkColor,
+          shape:
+          const RoundedRectangleBorder(
+              borderRadius:
+              BorderRadius.only(
+                topLeft: Radius.circular(8),
+                topRight: Radius.circular(8),
+              )),
+        ),
+        child: const Text(
+          'Product design and development',
+          style: TextStyle(
+            fontSize: 24,
+          ),
+        ),
+      ),
+    ];
+    
+    if (!Constants.isExpandedScreen) {
+      return Column(
+        children: [
+          SizedBox(
+            width: double.infinity,
+            child: buttons[0],
+          ),
+          SizedBox(
+            width: double.infinity,
+            child: buttons[1],
+          ),
+        ],
+      );
+    }
+    
+    return Row(
+      children: buttons,
+    );
+  }
 }

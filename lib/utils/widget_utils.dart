@@ -1,4 +1,5 @@
 import 'package:anaheim_technologies_website/utils/color_utils.dart';
+import 'package:anaheim_technologies_website/utils/constants.dart';
 import 'package:anaheim_technologies_website/utils/gradient_utils.dart';
 import 'package:anaheim_technologies_website/utils/print_utils.dart';
 import 'package:flutter/material.dart';
@@ -120,7 +121,9 @@ class _HoveredTextState extends State<HoveredText> {
                   : null,
           borderRadius: !widget.filledIndicator ? null : BorderRadius.only(
             topLeft: Radius.circular(8),
-            bottomLeft: Radius.circular(8)
+            bottomLeft: Radius.circular(8),
+            topRight: !Constants.isExpandedScreen ? Radius.circular(8) : Radius.zero,
+            bottomRight: !Constants.isExpandedScreen ? Radius.circular(8) : Radius.zero,
           )
         ),
         child: Text(

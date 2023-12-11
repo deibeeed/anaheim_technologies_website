@@ -1,5 +1,6 @@
 import 'package:anaheim_technologies_website/features/contact_us/bloc/contact_us_bloc.dart';
 import 'package:anaheim_technologies_website/utils/color_utils.dart';
+import 'package:anaheim_technologies_website/utils/constants.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -84,7 +85,7 @@ class ContactUsScreen extends StatelessWidget {
               height: 32,
             ),
             SizedBox(
-              width: 350,
+              width: !Constants.isExpandedScreen ? double.infinity : 350,
               child: BlocBuilder<ContactUsBloc, ContactUsState>(
                 builder: (context, state) {
                   return Column(
