@@ -85,7 +85,7 @@ class HomeScreen2 extends StatelessWidget {
                     ),
                     if (GoRouter.of(context).location != '/')
                       Padding(
-                      padding: EdgeInsets.symmetric(
+                      padding: const EdgeInsets.symmetric(
                         vertical: 56,
                       ),
                       child: Row(
