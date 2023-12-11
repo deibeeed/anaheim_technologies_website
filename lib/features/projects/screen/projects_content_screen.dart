@@ -9,14 +9,14 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 
 class MasterDetailScreen extends StatefulWidget {
-  const MasterDetailScreen(
-      {super.key,
-      required this.title,
-      required this.titleList,
-      required this.detailList,
-      this.narrativeList = const [],
-      this.showAllTitleList = false,
-      this.detailListPaddingTop});
+  const MasterDetailScreen({super.key,
+    required this.title,
+    required this.titleList,
+    required this.detailList,
+    this.narrativeList = const [],
+    this.showAllTitleList = false,
+    this.detailListPaddingTop,
+    this.filledIndicator = false,});
 
   final String title;
   final List<String> titleList;
@@ -24,6 +24,7 @@ class MasterDetailScreen extends StatefulWidget {
   final List<Widget> detailList;
   final bool showAllTitleList;
   final double? detailListPaddingTop;
+  final bool filledIndicator;
 
   @override
   State<StatefulWidget> createState() => _MasterDetailState();
@@ -34,7 +35,9 @@ class _MasterDetailState extends State<MasterDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
+    final screenSize = MediaQuery
+        .of(context)
+        .size;
 
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -59,33 +62,26 @@ class _MasterDetailState extends State<MasterDetailScreen> {
                         : showingIndex == null || showingIndex == index,
                     child: Padding(
                       padding: EdgeInsets.only(bottom: 16),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          HoveredText(
-                            text: element,
-                            alwaysShowIndicator: showingIndex == index,
-                            onTap: () {
-                              setState(() {
-                                if (!widget.showAllTitleList &&
-                                    showingIndex != null) {
-                                  showingIndex = null;
-                                  return;
-                                }
+                      child: SizedBox(
+                        width: widget.filledIndicator ? double.infinity : null,
+                        child: HoveredText(
+                          text: element,
+                          alwaysShowIndicator: showingIndex == index,
+                          onTap: () {
+                            setState(() {
+                              if (!widget.showAllTitleList &&
+                                  showingIndex != null) {
+                                showingIndex = null;
+                                return;
+                              }
 
-                                showingIndex = index;
-                              });
-                            },
-                          ),
-                          if (widget.narrativeList.isNotEmpty)
-                            Icon(
-                              showingIndex != null
-                                  ? Icons.arrow_right_rounded
-                                  : Icons.arrow_drop_down_rounded,
-                              color: AppColors.foregroundColor,
-                            ),
-                        ],
+                              showingIndex = index;
+                            });
+                          },
+                          textStyle: const TextStyle(
+                            fontFamily: 'Plavsky', fontSize: 24,),
+                          filledIndicator: widget.filledIndicator,
+                        ),
                       ),
                     ));
               }),
@@ -93,11 +89,8 @@ class _MasterDetailState extends State<MasterDetailScreen> {
                 const SizedBox(
                   height: 20,
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 16),
-                  child: _showDetailNarrative(
-                    detailText: widget.narrativeList[showingIndex!],
-                  ),
+                _showDetailNarrative(
+                  detailText: widget.narrativeList[showingIndex!],
                 ),
               ]
             ],
@@ -110,8 +103,8 @@ class _MasterDetailState extends State<MasterDetailScreen> {
               padding: widget.detailListPaddingTop == null
                   ? EdgeInsets.zero
                   : EdgeInsets.only(
-                      top: widget.detailListPaddingTop!,
-                    ),
+                top: widget.detailListPaddingTop!,
+              ),
               child: widget.detailList[showingIndex!],
             ),
           ),

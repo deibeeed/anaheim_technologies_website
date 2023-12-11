@@ -68,6 +68,7 @@ class HoveredText extends StatefulWidget {
     this.textStyle = const TextStyle(fontFamily: 'Plavsky'),
     this.underlineColor = AppColors.foregroundColor,
     this.alwaysShowIndicator = false,
+    this.filledIndicator = false,
   });
 
   final String text;
@@ -76,6 +77,7 @@ class HoveredText extends StatefulWidget {
   final String? navigateTo;
   final bool alwaysShowIndicator;
   final VoidCallback? onTap;
+  final bool filledIndicator;
 
   @override
   State<StatefulWidget> createState() {
@@ -102,17 +104,34 @@ class _HoveredTextState extends State<HoveredText> {
         }
       },
       child: Container(
-        padding: const EdgeInsets.all(4),
+        padding: EdgeInsets.all(widget.filledIndicator ? 16 : 4),
         decoration: BoxDecoration(
-          border: Border(
-            bottom: isHovering || widget.alwaysShowIndicator
-                ? BorderSide(color: widget.underlineColor)
-                : const BorderSide(color: Colors.transparent),
-          ),
+          border: widget.filledIndicator
+              ? null
+              : Border(
+                  bottom: isHovering || widget.alwaysShowIndicator
+                      ? BorderSide(color: widget.underlineColor)
+                      : const BorderSide(color: Colors.transparent),
+                ),
+          color: !widget.filledIndicator
+              ? null
+              : widget.alwaysShowIndicator
+                  ? AppColors.textLinkColor
+                  : null,
+          borderRadius: !widget.filledIndicator ? null : BorderRadius.only(
+            topLeft: Radius.circular(8),
+            bottomLeft: Radius.circular(8)
+          )
         ),
         child: Text(
           widget.text,
-          style: widget.textStyle,
+          style: widget.textStyle.apply(
+            color: !widget.filledIndicator
+                ? null
+                : widget.alwaysShowIndicator
+                    ? AppColors.gradientBottom
+                    : null,
+          ),
         ),
       ),
     );
