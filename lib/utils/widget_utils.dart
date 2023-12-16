@@ -2,6 +2,7 @@ import 'package:anaheim_technologies_website/utils/color_utils.dart';
 import 'package:anaheim_technologies_website/utils/constants.dart';
 import 'package:anaheim_technologies_website/utils/gradient_utils.dart';
 import 'package:anaheim_technologies_website/utils/print_utils.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -56,6 +57,32 @@ class WidgetUtils {
           ),
         ),
       ),
+    );
+  }
+
+  static Widget showDetailNarrative({
+    required BuildContext context,
+    required String detailText,
+  }) {
+    return Text.rich(
+      TextSpan(
+          text: detailText,
+          style: const TextStyle(
+            height: 1.5,
+          ),
+          children: [
+            //space
+            TextSpan(text: ' '),
+            TextSpan(
+                text: 'Talk to us today!',
+                style: const TextStyle(
+                  color: AppColors.textLinkColor,
+                ),
+                recognizer: TapGestureRecognizer()
+                  ..onTap = () {
+                    GoRouter.of(context).go('/contact');
+                  })
+          ]),
     );
   }
 }

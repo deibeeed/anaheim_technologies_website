@@ -1,6 +1,6 @@
 name: anaheim_technologies_website
 description: Anaheim Technologies website.
-version: 1.0.0+1
+version: 1.0.0+3
 publish_to: none
 
 environment:

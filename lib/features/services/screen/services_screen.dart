@@ -18,7 +18,8 @@ class ServicesScreen extends StatelessWidget {
     var screenHeight = size.height;
     var screenWidth = size.width;
 
-    final pddNarrative = '''Imagine you have a great app idea that you want to bring to market. Our team specializes in helping you turn your idea into a tangible product by working with you every step of the way.
+    final pddNarrative =
+        '''Imagine you have a great app idea that you want to bring to market. Our team specializes in helping you turn your idea into a tangible product by working with you every step of the way.
 
 We begin by getting a deep understanding of your product idea and your target audience. From there, we use our expertise in app design to create a customized solution that meets your specifications and requirements.
 
@@ -26,7 +27,8 @@ Throughout the entire process, we keep you informed and involved. We provide reg
 
 In the end, we deliver a finished app that is user-friendly, functional, and meets the needs of your target market. Whether you're launching a new startup or expanding an existing product line, our team is here to help you realize your app idea.''';
 
-    final prototypingNarrative = '''Are you a business looking to implement IoT technology into your operations? At our company, we specialize in IoT prototyping and development, helping you turn your vision into a reality.
+    final prototypingNarrative =
+        '''Are you a business looking to implement IoT technology into your operations? At our company, we specialize in IoT prototyping and development, helping you turn your vision into a reality.
 
 We start by getting a deep understanding of your business needs and goals. From there, we use our expertise in IoT technology to create a customized solution that meets your specific requirements.
 
@@ -38,7 +40,8 @@ In the end, we deliver a functional IoT solution that is tailored to your unique
 
 Whether you're looking to improve your supply chain management, streamline your manufacturing processes, or create innovative products for your customers, we have the experience and expertise to help you achieve your IoT goals.''';
 
-    final remoteTeamsNarrative = '''At our company, we understand that businesses today are looking for more flexible and cost-effective ways to expand their capabilities. That's why we offer virtual teams as a service, providing businesses with access to top talents.
+    final virtualTeamsNarrative =
+        '''At our company, we understand that businesses today are looking for more flexible and cost-effective ways to expand their capabilities. That's why we offer virtual teams as a service, providing businesses with access to top talents.
 
 Our virtual teams are customized to meet your specific business needs and goals. We work with you to identify the skills and expertise required and then build a team that is optimized for your requirements.
 
@@ -56,13 +59,13 @@ At our company, we believe that virtual teams are the future of work. We help bu
         titleList: const [
           'Product design and development',
           'Prototyping',
-          'Remote teams',
+          'Virtual teams',
         ],
         filledIndicator: true,
         narrativeList: [
           pddNarrative,
           prototypingNarrative,
-          remoteTeamsNarrative,
+          virtualTeamsNarrative,
         ],
         detailList: [],
       );
@@ -75,33 +78,32 @@ At our company, we believe that virtual teams are the future of work. We help bu
       titleList: const [
         'Product design and development',
         'Prototyping',
-        'Remote teams',
+        'Virtual teams',
       ],
       filledIndicator: true,
       detailList: [
         SizedBox(
           width: screenWidth * 0.3,
-          child: Text(
-            pddNarrative,
-            style: const TextStyle(height: 1.5,),
+          child: WidgetUtils.showDetailNarrative(
+            context: context,
+            detailText: pddNarrative,
           ),
         ),
         SizedBox(
           width: screenWidth * 0.3,
-          child: Text(
-            prototypingNarrative,
-            style: const TextStyle(height: 1.5,),
+          child: WidgetUtils.showDetailNarrative(
+            context: context,
+            detailText: prototypingNarrative,
           ),
         ),
         SizedBox(
           width: screenWidth * 0.3,
-          child: Text(
-            remoteTeamsNarrative,
-            style: const TextStyle(height: 1.5,),
+          child: WidgetUtils.showDetailNarrative(
+            context: context,
+            detailText: virtualTeamsNarrative,
           ),
         ),
       ],
     );
   }
-
 }

@@ -100,7 +100,8 @@ class _MasterDetailState extends State<MasterDetailScreen> {
                       ),
                       Expanded(
                           child: SingleChildScrollView(
-                        child: _showDetailNarrative(
+                        child: WidgetUtils.showDetailNarrative(
+                          context: context,
                           detailText: widget.narrativeList[showingIndex!],
                         ),
                       )),
@@ -128,26 +129,5 @@ class _MasterDetailState extends State<MasterDetailScreen> {
     );
   }
 
-  Widget _showDetailNarrative({
-    required String detailText,
-  }) {
-    return Text.rich(
-      TextSpan(
-          text: detailText,
-          style: const TextStyle(
-            height: 1.5,
-          ),
-          children: [
-            TextSpan(
-                text: 'Talk to us today!',
-                style: const TextStyle(
-                  color: AppColors.textLinkColor,
-                ),
-                recognizer: TapGestureRecognizer()
-                  ..onTap = () {
-                    GoRouter.of(context).go('/hello');
-                  })
-          ]),
-    );
-  }
+
 }

@@ -46,7 +46,7 @@ Let us help you. ''',
                     color: AppColors.textLinkColor,
                   ),
                   recognizer: TapGestureRecognizer()..onTap = () {
-                    GoRouter.of(context).go('/hello');
+                    GoRouter.of(context).go('/contact');
                   }
               )
             ]

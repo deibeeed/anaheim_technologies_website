@@ -50,7 +50,7 @@ class HomeScreen extends StatelessWidget {
                     Expanded(
                       child: Padding(
                         padding: EdgeInsets.only(
-                          top: Constants.isExpandedScreen ? 96 : 48,
+                          top: 48,
                         ),
                         child: child,
                       ),
