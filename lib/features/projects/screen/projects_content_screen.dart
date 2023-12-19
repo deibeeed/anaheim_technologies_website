@@ -84,9 +84,9 @@ class _MasterDetailState extends State<MasterDetailScreen> {
                                     showingIndex = index;
                                   });
                                 },
-                                textStyle: const TextStyle(
+                                textStyle: TextStyle(
                                   fontFamily: 'Plavsky',
-                                  fontSize: 24,
+                                  fontSize: showingIndex == index ? 24 : 16,
                                 ),
                                 filledIndicator: widget.filledIndicator,
                               ),

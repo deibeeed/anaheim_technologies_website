@@ -51,18 +51,27 @@ With our virtual team services, businesses can expand their capabilities and tak
 
 At our company, we believe that virtual teams are the future of work. We help businesses build and manage remote workforces that are optimized for success, providing the flexibility and scalability needed to thrive in today's rapidly changing business environment.''';
 
+    final brandingNarrative =
+        '''Discover a new dimension in branding with our software company's innovative solutions. We seamlessly integrate design, strategy, and technology to craft compelling brand narratives that resonate with your audience. From logo design to dynamic digital experiences, our services ensure a visually striking and cohesive brand identity, adapting to the ever-changing digital landscape.
+
+Our commitment to uniqueness and authenticity sets us apart. We collaborate closely with clients to uncover the essence of their brand, using data analytics and user insights to continually refine and optimize branding strategies. Whether you're a startup establishing a unique identity or an established business seeking a refresh, our software-driven approach unlocks your brand's full potential, captivating and adapting in today's dynamic marketplace.
+
+Experience the fusion of creativity and technology in our branding services. Our software-driven approach not only delivers static visuals but also dynamic, interactive brand experiences. Tailored for startups and established businesses alike, our services bring your brand to life, fostering engagement and connection with your audience across diverse digital platforms.''';
+
     if (!Constants.isExpandedScreen) {
       return MasterDetailScreen(
         detailListPaddingTop: screenHeight * 0.03,
         showAllTitleList: false,
         title: 'Services',
         titleList: const [
+          'Branding',
           'Product design and development',
           'Prototyping',
           'Virtual teams',
         ],
         filledIndicator: true,
         narrativeList: [
+          brandingNarrative,
           pddNarrative,
           prototypingNarrative,
           virtualTeamsNarrative,
@@ -76,12 +85,20 @@ At our company, we believe that virtual teams are the future of work. We help bu
       showAllTitleList: true,
       title: 'Services',
       titleList: const [
+        'Branding',
         'Product design and development',
         'Prototyping',
         'Virtual teams',
       ],
       filledIndicator: true,
       detailList: [
+        SizedBox(
+          width: screenWidth * 0.3,
+          child: WidgetUtils.showDetailNarrative(
+            context: context,
+            detailText: brandingNarrative,
+          ),
+        ),
         SizedBox(
           width: screenWidth * 0.3,
           child: WidgetUtils.showDetailNarrative(

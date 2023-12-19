@@ -34,9 +34,7 @@ class HomeScreenContent extends StatelessWidget {
                   '''Ideas -
 Delivered''',
                   style: TextStyle(
-                      fontFamily: 'Plavsky',
-                      color: Colors.white,
-                      fontSize: 48),
+                      fontFamily: 'Plavsky', color: Colors.white, fontSize: 48),
                 ),
               ],
             ],
@@ -48,9 +46,7 @@ Delivered''',
                 '''Ideas -
 Delivered''',
                 style: TextStyle(
-                    fontFamily: 'Plavsky',
-                    color: Colors.white,
-                    fontSize: 48),
+                    fontFamily: 'Plavsky', color: Colors.white, fontSize: 48),
               ),
             ),
           Padding(
@@ -66,8 +62,7 @@ Delivered''',
                       vertical: 20,
                       horizontal: 24,
                     ),
-                    backgroundColor:
-                    AppColors.textLinkColor,
+                    backgroundColor: AppColors.textLinkColor,
                   ),
                   child: const Text(
                     'Our services',
@@ -87,8 +82,7 @@ Delivered''',
                       vertical: 20,
                       horizontal: 24,
                     ),
-                    foregroundColor:
-                    AppColors.textLinkColor,
+                    foregroundColor: AppColors.textLinkColor,
                     side: const BorderSide(
                       color: AppColors.textLinkColor,
                     ),
@@ -111,8 +105,8 @@ Delivered''',
               decoration: const BoxDecoration(
                 border: Border(
                     bottom: BorderSide(
-                      color: AppColors.textLinkColor,
-                    )),
+                  color: AppColors.textLinkColor,
+                )),
               ),
               child: BlocBuilder<ServiceSelectCubit, int>(
                 builder: _buildServiceMenu,
@@ -125,13 +119,24 @@ Delivered''',
             ),
             child: BlocBuilder<ServiceSelectCubit, int>(
               builder: (context, state) {
-                var text =
-                    'Your digital identity is as important as your real-world one. We create your digital identity that emulates your mission.';
+                // var text =
+                //     'Your digital identity is as important as your real-world one. We create your digital identity that emulates your mission.';
+                //
+                // if (state == 1) {
+                //   text =
+                //   'Creating out of nothing is in our DNA. We make mobile, web, desktop applications in all screens and IoT prototyping, making great user experience and more user engagement.\n\nWe are your partners in making your product speak for your digital identity. ';
+                // }
 
-                if (state == 1) {
-                  text =
-                  'Creating out of nothing is in our DNA. We make mobile, web, desktop applications in all screens and IoT prototyping, making great user experience and more user engagement.\n\nWe are your partners in making your product speak for your digital identity. ';
-                }
+                final text = switch (state) {
+                  0 =>
+                    'Your digital identity is as important as your real-world one. We create your digital identity that emulates your mission.',
+                  1 =>
+                    'Creating out of nothing is in our DNA. We make mobile, web, desktop applications in all screens and IoT prototyping, making great user experience and more user engagement.\n\nWe are your partners in making your product speak for your digital identity. ',
+                  2 =>
+                    'Building or expanding a team is never easy, specially when looking for  people that fits your needs and culture.\n\nLet us unburden you with these administrative works so that you can focus on what matters, building your world-class application.',
+                  _ => ''
+                };
+
                 return Text(
                   text,
                   style: const TextStyle(
@@ -166,7 +171,9 @@ Delivered''',
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 48,),
+            padding: const EdgeInsets.only(
+              top: 48,
+            ),
             child: OutlinedButton(
               onPressed: () {
                 GoRouter.of(context).go('/contact');
@@ -176,8 +183,7 @@ Delivered''',
                   vertical: 20,
                   horizontal: 24,
                 ),
-                foregroundColor:
-                AppColors.textLinkColor,
+                foregroundColor: AppColors.textLinkColor,
                 side: const BorderSide(
                   color: AppColors.textLinkColor,
                 ),
@@ -248,32 +254,26 @@ Delivered''',
     final buttons = [
       FilledButton(
         onPressed: () {
-          context
-              .read<ServiceSelectCubit>()
-              .selectBranding();
+          context.read<ServiceSelectCubit>().selectBranding();
         },
         style: FilledButton.styleFrom(
-          padding:
-          const EdgeInsets.symmetric(
+          padding: const EdgeInsets.symmetric(
             vertical: 20,
             horizontal: 24,
           ),
-          backgroundColor: state == 0
-              ? AppColors.textLinkColor
-              : Colors.transparent,
-          foregroundColor: state == 0
-              ? AppColors.gradientBottom
-              : AppColors.textLinkColor,
-          shape:
-          const RoundedRectangleBorder(
-              borderRadius:
-              BorderRadius.only(
-                topLeft: Radius.circular(8),
-                topRight: Radius.circular(8),
-              )),
+          backgroundColor:
+              state == 0 ? AppColors.textLinkColor : Colors.transparent,
+          foregroundColor:
+              state == 0 ? AppColors.gradientBottom : AppColors.textLinkColor,
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(8),
+            topRight: Radius.circular(8),
+          )),
         ),
         child: const Text(
           'Branding',
+          textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: 24,
           ),
@@ -281,39 +281,60 @@ Delivered''',
       ),
       FilledButton(
         onPressed: () {
-          context
-              .read<ServiceSelectCubit>()
-              .selectPdd();
+          context.read<ServiceSelectCubit>().selectPdd();
         },
         style: FilledButton.styleFrom(
-          padding:
-          const EdgeInsets.symmetric(
+          padding: const EdgeInsets.symmetric(
             vertical: 20,
             horizontal: 24,
           ),
-          backgroundColor: state == 1
-              ? AppColors.textLinkColor
-              : Colors.transparent,
-          foregroundColor: state == 1
-              ? AppColors.gradientBottom
-              : AppColors.textLinkColor,
-          shape:
-          const RoundedRectangleBorder(
-              borderRadius:
-              BorderRadius.only(
-                topLeft: Radius.circular(8),
-                topRight: Radius.circular(8),
-              )),
+          backgroundColor:
+              state == 1 ? AppColors.textLinkColor : Colors.transparent,
+          foregroundColor:
+              state == 1 ? AppColors.gradientBottom : AppColors.textLinkColor,
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(8),
+            topRight: Radius.circular(8),
+          )),
         ),
         child: const Text(
-          'Product design and development',
+          'Product Design, Development and Prototyping',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 24,
+          ),
+        ),
+      ),
+      FilledButton(
+        onPressed: () {
+          context.read<ServiceSelectCubit>().selectVt();
+        },
+        style: FilledButton.styleFrom(
+          padding: const EdgeInsets.symmetric(
+            vertical: 20,
+            horizontal: 24,
+          ),
+          backgroundColor:
+              state == 2 ? AppColors.textLinkColor : Colors.transparent,
+          foregroundColor:
+              state == 2 ? AppColors.gradientBottom : AppColors.textLinkColor,
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(8),
+            topRight: Radius.circular(8),
+          )),
+        ),
+        child: const Text(
+          'Virtual Teams',
+          textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: 24,
           ),
         ),
       ),
     ];
-    
+
     if (!Constants.isExpandedScreen) {
       return Column(
         children: [
@@ -325,11 +346,16 @@ Delivered''',
             width: double.infinity,
             child: buttons[1],
           ),
+          SizedBox(
+            width: double.infinity,
+            child: buttons[2],
+          ),
         ],
       );
     }
-    
+
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: buttons,
     );
   }

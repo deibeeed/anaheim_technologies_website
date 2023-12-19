@@ -7,4 +7,6 @@ class ServiceSelectCubit extends Cubit<int> {
   void selectBranding() => emit(0);
 
   void selectPdd() => emit(1);
+
+  void selectVt() => emit(2);
 }
