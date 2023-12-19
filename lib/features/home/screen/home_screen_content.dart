@@ -251,6 +251,8 @@ Delivered''',
   }
 
   Widget _buildServiceMenu(BuildContext context, int state) {
+    final screenWidth = MediaQuery.of(context).size.width;
+
     final buttons = [
       FilledButton(
         onPressed: () {
@@ -335,7 +337,7 @@ Delivered''',
       ),
     ];
 
-    if (!Constants.isExpandedScreen) {
+    if (!Constants.isExpandedScreen || screenWidth < 1000) {
       return Column(
         children: [
           SizedBox(

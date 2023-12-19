@@ -1,17 +1,18 @@
 import 'package:anaheim_technologies_website/utils/color_utils.dart';
+import 'package:anaheim_technologies_website/utils/constants.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
-
 
 class AboutUsScreen extends StatelessWidget {
   const AboutUsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-
-    return SingleChildScrollView(
-      child: Column(
+    final children = [
+      Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -19,7 +20,7 @@ class AboutUsScreen extends StatelessWidget {
             'About us',
             style: TextStyle(fontFamily: 'Mechsuit', fontSize: 24),
           ),
-          SizedBox(
+          const SizedBox(
             height: 32,
           ),
           Text.rich(
@@ -36,24 +37,71 @@ One of our mission is to give everybody who is very interested in software devel
 We are ready to be your partners in creating solutions to your software development and IoT prototyping needs.
 
 Let us help you. ''',
-                style: TextStyle(
+                style: const TextStyle(
                   height: 1.5,
                   fontSize: 16,
-                ), children: [
-              TextSpan(
-                  text: 'Talk to us today!',
-                  style: const TextStyle(
-                    color: AppColors.textLinkColor,
-                  ),
-                  recognizer: TapGestureRecognizer()..onTap = () {
-                    GoRouter.of(context).go('/contact');
-                  }
-              )
-            ]
-            ),
+                ),
+                children: [
+                  TextSpan(
+                      text: 'Talk to us today!',
+                      style: const TextStyle(
+                        color: AppColors.textLinkColor,
+                      ),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          GoRouter.of(context).go('/contact');
+                        })
+                ]),
           ),
         ],
       ),
-    );
+      SizedBox(
+        height: 500,
+        child: Wrap(
+          spacing: 32,
+          alignment: WrapAlignment.spaceEvenly,
+          crossAxisAlignment: WrapCrossAlignment.center,
+          runSpacing: 32,
+          children: [
+            'flutter_logo.svg',
+            'dart_logo.svg',
+            'firebase_logo.svg',
+            'gcp_logo_full.svg',
+            'golang_logo.svg',
+            'java_logo_full.svg',
+            'kotlin_logo.svg',
+            'nodejs_logo.svg',
+            'python_logo.svg',
+            'swift_logo.svg',
+            'typescript_logo.svg',
+            'cpp_logo.svg',
+            'gcp_iot_core_log.svg',
+            'lorawan_logo_dark.svg',
+          ].map((e) => SvgPicture.asset('assets/svg/$e', height: 56,)).toList(),
+        ),
+      ),
+    ];
+
+    return LayoutBuilder(builder: (context, constraints) {
+
+      return SingleChildScrollView(
+        child: Constants.isExpandedScreen ? Row(
+          children: [
+            Expanded(
+              child: children[0],
+            ),
+            const Gap(32),
+            Expanded(
+              child: children[1],)
+          ],
+        ) : Column(
+          children: [
+            children[0],
+            const Gap(32),
+            children[1],
+          ],
+        ),
+      );
+    });
   }
 }
