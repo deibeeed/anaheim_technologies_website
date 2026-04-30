@@ -1,13 +1,59 @@
-name: anaheim_technologies_website
+name: ci-deploy
 
-on: [pull_request, push]
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  semantic-pull-request:
-    uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/semantic_pull_request.yml@v1
+  build-and-deploy:
+    name: Build and deploy
+    runs-on: ubuntu-latest
 
-  build:
-    uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/flutter_package.yml@v1
-    with:
-      flutter_channel: stable
-      flutter_version: 3.3.8
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.41.6'
+          channel: 'stable'
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Generate localizations
+        run: flutter gen-l10n
+
+      - name: Analyze (non-fatal infos)
+        run: flutter analyze --no-fatal-infos
+
+      - name: Build web (production)
+        run: flutter build web --release -t lib/main_production.dart
+
+      # Deploy to live channel on push to master or manual trigger
+      - name: Deploy to Firebase Hosting (live)
+        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_ANAHEIM_TECHNOLOGIES }}
+          projectId: anaheim-technologies
+          channelId: live
+
+      # Preview channel for PRs from the same repo (forks won't have secret access)
+      - name: Deploy preview channel (PR)
+        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_ANAHEIM_TECHNOLOGIES }}
+          projectId: anaheim-technologies
