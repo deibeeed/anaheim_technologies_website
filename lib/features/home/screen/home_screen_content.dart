@@ -19,7 +19,7 @@ class HomeScreenContent extends StatelessWidget {
               const Expanded(
                 flex: 3,
                 child: Text(
-                  'We design and create applications that brings your ideas to life on any screens, making your ideas world-class with the use of the best tools and engineering practices. We make...',
+                  'We turn ideas into shipped products — web, mobile, cloud, and hardware when the product needs to live in the physical world. A specialist studio with the depth of a small team. Founder-friendly, senior by default.',
                   style: TextStyle(
                     fontSize: 24,
                     color: Colors.white,
@@ -129,11 +129,11 @@ Delivered''',
 
                 final text = switch (state) {
                   0 =>
-                    'Your digital identity is as important as your real-world one. We create your digital identity that emulates your mission.',
+                    'Your brand is the first thing customers see and the last thing they remember. We design digital identities that look the part and hold up under scale — logo, color, typography, motion, and the system that ties them all together.',
                   1 =>
-                    'Creating out of nothing is in our DNA. We make mobile, web, desktop applications in all screens and IoT prototyping, making great user experience and more user engagement.\n\nWe are your partners in making your product speak for your digital identity. ',
+                    "From napkin sketch to production. We design and build mobile apps, web platforms, and cloud backends — and when the product needs to live in the physical world, we prototype the hardware too. Most studios stop at one of those. We don't.",
                   2 =>
-                    'Building or expanding a team is never easy, specially when looking for  people that fits your needs and culture.\n\nLet us unburden you with these administrative works so that you can focus on what matters, building your world-class application.',
+                    'Building a team is hard. We help you skip the talent-acquisition slog — sourcing, technical vetting, onboarding — and stay on as the engineering layer that keeps everything moving. Your culture stays yours. The hiring pain becomes ours.',
                   _ => ''
                 };
 
@@ -175,8 +175,11 @@ Delivered''',
               top: 48,
             ),
             child: OutlinedButton(
-              onPressed: () {
-                GoRouter.of(context).go('/contact');
+              onPressed: () async {
+                const bookingsUrl = 'https://bit.ly/CallATO';
+                if (await canLaunchUrlString(bookingsUrl)) {
+                  await launchUrlString(bookingsUrl);
+                }
               },
               style: OutlinedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(
@@ -194,6 +197,39 @@ Delivered''',
                   fontSize: 16,
                 ),
               ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 96),
+            child: Column(
+              children: const [
+                Text(
+                  'CURRENTLY BUILDING',
+                  style: TextStyle(
+                    color: AppColors.textLinkColor,
+                    fontSize: 14,
+                    letterSpacing: 2,
+                  ),
+                ),
+                Gap(16),
+                Text(
+                  'Loooans',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontFamily: 'Plavsky',
+                    fontSize: 32,
+                    color: Colors.white,
+                  ),
+                ),
+                Gap(12),
+                Text(
+                  'The first product on our fintech stack. Now in closed beta.\nWe dogfood every stack we recommend.',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
+                ),
+              ],
             ),
           ),
           Padding(

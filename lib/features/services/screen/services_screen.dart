@@ -19,44 +19,30 @@ class ServicesScreen extends StatelessWidget {
     var screenWidth = size.width;
 
     final pddNarrative =
-        '''Imagine you have a great app idea that you want to bring to market. Our team specializes in helping you turn your idea into a tangible product by working with you every step of the way.
+        '''Imagine an idea sitting in a notes app. Now imagine it in your customers' hands six weeks from now.
 
-We begin by getting a deep understanding of your product idea and your target audience. From there, we use our expertise in app design to create a customized solution that meets your specifications and requirements.
+We design, build, and ship products end-to-end — mobile apps in Flutter, web platforms, backend services in Go and Node, cloud infrastructure on Firebase and GCP. We start with a clear understanding of what the product actually needs to do (and what it doesn't — saying no early saves months later). Then we build, ship, and iterate.
 
-Throughout the entire process, we keep you informed and involved. We provide regular updates and seek your input on important decisions to ensure that the final product meets your vision and goals.
-
-In the end, we deliver a finished app that is user-friendly, functional, and meets the needs of your target market. Whether you're launching a new startup or expanding an existing product line, our team is here to help you realize your app idea.''';
+No theatrical strategy decks. No 6-month "discovery phases." Real working software, fast.''';
 
     final prototypingNarrative =
-        '''Are you a business looking to implement IoT technology into your operations? At our company, we specialize in IoT prototyping and development, helping you turn your vision into a reality.
+        '''Some products can't live entirely on a screen. Sensors, devices, embedded firmware — the work most software shops won't touch and most hardware shops can't ship — that's where we shine.
 
-We start by getting a deep understanding of your business needs and goals. From there, we use our expertise in IoT technology to create a customized solution that meets your specific requirements.
+We design and prototype IoT systems end-to-end: hardware selection, firmware, LoRaWAN and other connectivity protocols, cloud ingestion, and the mobile or web apps that make the data useful. Seven years of doing this at scale at GlacierGrid (YC-backed IoT) means we know what breaks in production — and we design around it from day one.
 
-Our team of experts is equipped with the latest tools and technologies to design and develop connected devices, sensors, and applications that integrate seamlessly with your business processes.
-
-Throughout the entire process, we keep you informed and involved, seeking your input on important decisions to ensure that the final product meets your vision and goals.
-
-In the end, we deliver a functional IoT solution that is tailored to your unique business needs, providing you with the necessary tools and insights to optimize your operations, increase efficiency, and enhance customer satisfaction.
-
-Whether you're looking to improve your supply chain management, streamline your manufacturing processes, or create innovative products for your customers, we have the experience and expertise to help you achieve your IoT goals.''';
+If your product needs to live in the physical world, let's talk.''';
 
     final virtualTeamsNarrative =
-        '''At our company, we understand that businesses today are looking for more flexible and cost-effective ways to expand their capabilities. That's why we offer virtual teams as a service, providing businesses with access to top talents.
+        '''Building a team is hard. Finding the right people, running interviews, onboarding, managing — it's a job on top of the job you already have.
 
-Our virtual teams are customized to meet your specific business needs and goals. We work with you to identify the skills and expertise required and then build a team that is optimized for your requirements.
+We help businesses build and run remote engineering teams without the administrative overhead. We handle talent sourcing, technical vetting, onboarding, and ongoing engineering oversight. Your culture stays yours. Your hiring pain becomes ours.
 
-Our virtual team services include everything from talent acquisition and onboarding to ongoing management and support. Our team is equipped with the latest technology and communication tools, enabling seamless collaboration and productivity regardless of physical location.
-
-With our virtual team services, businesses can expand their capabilities and take advantage of new opportunities without the need for physical office space or equipment. Our turnkey solution takes the hassle out of building and managing a remote workforce, enabling businesses to focus on their core operations.
-
-At our company, we believe that virtual teams are the future of work. We help businesses build and manage remote workforces that are optimized for success, providing the flexibility and scalability needed to thrive in today's rapidly changing business environment.''';
+Whether you need one senior engineer or a full pod, we build remote teams optimized for the work — not the headcount.''';
 
     final brandingNarrative =
-        '''Discover a new dimension in branding with our software company's innovative solutions. We seamlessly integrate design, strategy, and technology to craft compelling brand narratives that resonate with your audience. From logo design to dynamic digital experiences, our services ensure a visually striking and cohesive brand identity, adapting to the ever-changing digital landscape.
+        '''Your brand is the first thing customers see and the last thing they remember.
 
-Our commitment to uniqueness and authenticity sets us apart. We collaborate closely with clients to uncover the essence of their brand, using data analytics and user insights to continually refine and optimize branding strategies. Whether you're a startup establishing a unique identity or an established business seeking a refresh, our software-driven approach unlocks your brand's full potential, captivating and adapting in today's dynamic marketplace.
-
-Experience the fusion of creativity and technology in our branding services. Our software-driven approach not only delivers static visuals but also dynamic, interactive brand experiences. Tailored for startups and established businesses alike, our services bring your brand to life, fostering engagement and connection with your audience across diverse digital platforms.''';
+We design digital identities that look the part and hold up under scale — logo, color, typography, motion, and the system that ties them all together. Whether you're a founder establishing a new identity or an established business refreshing one, we treat branding as engineering: consistent, documented, and built to last.''';
 
     if (!Constants.isExpandedScreen) {
       return MasterDetailScreen(

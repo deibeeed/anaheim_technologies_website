@@ -26,17 +26,19 @@ class AboutUsScreen extends StatelessWidget {
           Text.rich(
             TextSpan(
                 text:
-                '''We are  an Innovation Technology company that specializes on software design and development, that includes from frontend, Mobile, Web and desktop alike, to backend. We also specialize IoT (Internet of things) design and development prototyping. 
+                '''Anaheim Technologies is a specialist product studio — small by design, senior by default. We turn ideas into shipped products: web, mobile, cloud, and hardware when the product needs to live in the physical world.
 
-Our team believes that innovation should not come at a cost and that, technology should be enjoyed by everyone, young and old alike.
+13+ years of engineering depth. Ex-GlacierGrid (YC-backed IoT). The work most agencies spread across a team of five, we deliver through deep technical concentration.
 
-That’s why we do intensive interviews with our customers, trying to get even the smallest details so that we can empathize with them, as well as the users of their product.
+Who we work with:
 
-One of our mission is to give everybody who is very interested in software development as a  career a chance to try being one so that they will have the experience and we will be able to help them decide if they really want to pursue the art of software development or not.
+→ Founders with an idea but no engineering team. We help you decide what to build, then we build it. v1 in your hands, not on a roadmap.
 
-We are ready to be your partners in creating solutions to your software development and IoT prototyping needs.
+→ SMBs going digital — the kind that need software but don't want to hire a full-time CTO yet. We become yours, fractionally.
 
-Let us help you. ''',
+Currently building Loooans — the first product on our fintech stack, now in closed beta. We dogfood every stack we recommend. Even this website is written in Flutter. We don't sell what we don't ship.
+
+Let's build something. ''',
                 style: const TextStyle(
                   height: 1.5,
                   fontSize: 16,

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:go_router/go_router.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class ContactUsScreen extends StatelessWidget {
   ContactUsScreen({super.key});
@@ -61,10 +62,52 @@ class ContactUsScreen extends StatelessWidget {
             const SizedBox(
               height: 32,
             ),
+            const Text(
+              "The fastest way to talk to us — book a 30-minute discovery call. No prep, no decks, just questions about what you're building.",
+              style: TextStyle(height: 1.5),
+            ),
+            const SizedBox(
+              height: 24,
+            ),
+            SizedBox(
+              width: !Constants.isExpandedScreen ? double.infinity : 350,
+              child: FilledButton(
+                onPressed: () async {
+                  const bookingsUrl = 'https://bit.ly/CallATO';
+                  if (await canLaunchUrlString(bookingsUrl)) {
+                    await launchUrlString(bookingsUrl);
+                  }
+                },
+                style: FilledButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 20,
+                    horizontal: 24,
+                  ),
+                  backgroundColor: AppColors.textLinkColor,
+                ),
+                child: const Text(
+                  'Book a discovery call',
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: AppColors.gradientBottom,
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 32,
+            ),
+            const Text(
+              '— or send us a message —',
+              style: TextStyle(height: 1.5),
+            ),
+            const SizedBox(
+              height: 32,
+            ),
             Text.rich(
               TextSpan(
                   text:
-                      'We want to know you more. Please fill out the form. Rest assured that we are collecting your data according to the Data Privacy Act of 2012.\n\nClick ',
+                      'Prefer to send a longer message? Fill out the form below. Rest assured that we are collecting your data according to the Data Privacy Act of 2012.\n\nClick ',
                   style: TextStyle(height: 1.5),
                   children: [
                     TextSpan(
