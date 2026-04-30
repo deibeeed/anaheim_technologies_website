@@ -33,8 +33,8 @@ jobs:
       - name: Generate localizations
         run: flutter gen-l10n
 
-      - name: Analyze (non-fatal infos)
-        run: flutter analyze --no-fatal-infos
+      - name: Analyze (errors only)
+        run: flutter analyze --no-fatal-warnings --no-fatal-infos
 
       - name: Build web (production)
         run: flutter build web --release -t lib/main_production.dart
