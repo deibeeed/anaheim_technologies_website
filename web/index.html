@@ -46,9 +46,78 @@
 
   <title>Anaheim Technologies — Ideas, Delivered</title>
   <link rel="manifest" href="manifest.json">
+
+  <style>
+    @font-face {
+      font-family: 'Mechsuit';
+      src: url('assets/fonts/Mechsuit.otf') format('opentype');
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Plavsky';
+      src: url('assets/fonts/Plavsky.otf') format('opentype');
+      font-display: swap;
+    }
+    #ato-splash {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: #0A0A0A;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 28px;
+      color: #FFFFFF;
+      transition: opacity 0.4s ease-out;
+    }
+    #ato-splash.ato-fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+    #ato-splash .ato-mark {
+      font-family: 'Mechsuit', -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+      font-size: 56px;
+      letter-spacing: 6px;
+      color: #FFFFFF;
+    }
+    #ato-splash .ato-pulse {
+      width: 60px;
+      height: 2px;
+      background: #3EE58C;
+      border-radius: 1px;
+      animation: ato-pulse 1.4s ease-in-out infinite;
+    }
+    #ato-splash .ato-tagline {
+      font-family: 'Plavsky', -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+      font-size: 16px;
+      letter-spacing: 4px;
+      color: #3EE58C;
+      text-transform: uppercase;
+    }
+    @keyframes ato-pulse {
+      0%, 100% { transform: scaleX(0.2); opacity: 0.4; }
+      50% { transform: scaleX(1); opacity: 1; }
+    }
+  </style>
 </head>
 
 <body>
+  <div id="ato-splash">
+    <div class="ato-mark">ATO</div>
+    <div class="ato-pulse"></div>
+    <div class="ato-tagline">Ideas — Delivered</div>
+  </div>
+  <script>
+    window.addEventListener('flutter-first-frame', function () {
+      var splash = document.getElementById('ato-splash');
+      if (splash) {
+        splash.classList.add('ato-fade-out');
+        setTimeout(function () { splash.remove(); }, 400);
+      }
+    });
+  </script>
+
   <!-- This script installs service_worker.js to provide PWA functionality to
        application. For more information, see:
        https://developers.google.com/web/fundamentals/primers/service-workers -->
